@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FutureEducationalPlatform.Application
+namespace FutureEducationalPlatform.Application.Interfaces.IRepository
 {
-    public class ServiceExtension
+    public interface IBaseRepository
     {
-
     }
 }
