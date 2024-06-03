@@ -25,13 +25,13 @@ namespace FutureEducationalPlatform.Persistence.Repositories
 
         public async Task<T> AddWithReturnAsync(T entity)
         {
-            await Entites.AddAsync(entity);
-            return entity;
+           var result= await Entites.AddAsync(entity);
+            return result.Entity;
         }
 
         public void Delete(T entity)
         {
-            entity.isDeleted=true;
+            entity.IsDeleted=true;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
