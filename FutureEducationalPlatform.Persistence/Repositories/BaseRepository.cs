@@ -9,45 +9,46 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Persistence.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseModel
+    public class BaseRepository<T> where T : BaseModel , IBaseRepository<T>
     {
         private readonly ApplicationDbContext _context;
-
+        private DbSet<T> Entites;
         public BaseRepository(ApplicationDbContext context)
         {
             _context = context;
+            Entites = _context.Set<T>();
+        }
+        public async Task AddAsync(T entity)
+        {
+            await Entites.AddAsync(entity);
         }
 
-        public Task AddAsync(T entity)
+        public async Task<T> AddWithReturnAsync(T entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> AddWithReturnAsync(T entity)
-        {
-            throw new NotImplementedException();
+            await Entites.AddAsync(entity);
+            return entity;
         }
 
         public void Delete(T entity)
         {
-           entity.IsDeleted = true;
+            entity.isDeleted=true;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _context.Set<T>().ToListAsync();
+            return await Entites.ToListAsync();
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await Entites.FindAsync(id);
         }
 
         public T Update(T entity)
         {
-            _context.Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
-            return _context.Update(entity).Entity;
+            Entites.Attach(entity);
+            Entites.Entry(entity).State = EntityState.Modified;
+            return Entites.Update(entity).Entity;
         }
     }
 }
