@@ -12,7 +12,7 @@ namespace FutureEducationalPlatform.Application.Interfaces.IRepository
         Task AddAsync(T entity);
         Task<T> AddWithReturnAsync(T entity);
         Task<IEnumerable<T>> GetAllAsync();
-        Task<bool> Delete(T entity);
-        Task<T> Update(T entity);
+        void Delete(T entity);
+        T Update(T entity);
     }
 }
