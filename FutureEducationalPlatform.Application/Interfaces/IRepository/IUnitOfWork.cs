@@ -1,12 +1,16 @@
-﻿using System;
+﻿using FutureEducationalPlatform.Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Interfaces.IRepository
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork:IDisposable
     {
+        IBaseRepository<T> GetRepository<T>() where T : BaseModel;
+        Task CompleteAsync();
     }
 }

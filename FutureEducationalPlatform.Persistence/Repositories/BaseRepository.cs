@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Persistence.Repositories
 {
-    public class BaseRepository<T> where T : BaseModel , IBaseRepository<T>
+    public class BaseRepository<T> : IBaseRepository<T> where T : BaseModel
     {
         private readonly ApplicationDbContext _context;
         private DbSet<T> Entites;
