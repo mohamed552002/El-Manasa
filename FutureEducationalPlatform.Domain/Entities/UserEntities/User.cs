@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FutureEducationalPlatform.Domain.Entities
+namespace FutureEducationalPlatform.Domain.Entities.UserEntities
 {
-    public class User:BaseModel
+    public class User : BaseModel
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
@@ -16,8 +16,8 @@ namespace FutureEducationalPlatform.Domain.Entities
         public string UserName { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
-        public DateTime CreatedAt { get; set; }= DateTime.Now;
-        public DateTime LastUpdatedAt { get; set;}
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime LastUpdatedAt { get; set; }
         public GenderEnum Gender { get; set; }
         public bool EmailConfirmed { get; set; }
         public string? SecurityStamp { get; set; }
@@ -25,6 +25,8 @@ namespace FutureEducationalPlatform.Domain.Entities
         public bool LockoutEnabled { get; set; }
         public DateTimeOffset? LockoutEnd { get; set; }
         public bool TwoFactorEnabled { get; set; }
+        // Navigation Properties
+        public virtual IEnumerable<UserRoles> Roles { get; set; }
     }
     public enum GenderEnum
     {

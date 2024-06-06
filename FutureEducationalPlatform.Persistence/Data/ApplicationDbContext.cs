@@ -1,5 +1,6 @@
-﻿using FutureEducationalPlatform.Domain.Entities;
-using FutureEducationalPlatform.Domain.EntityConfiguration;
+﻿
+using FutureEducationalPlatform.Domain.Entities.UserEntities;
+using FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntitiesConfiguration;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,11 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
+        modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
     }
     public DbSet<User> Users { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<UserRoles> UserRoles { get; set; }
 }
 
