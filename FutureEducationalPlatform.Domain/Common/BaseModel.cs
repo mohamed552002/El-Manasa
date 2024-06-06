@@ -8,6 +8,6 @@ namespace FutureEducationalPlatform.Domain.Common
 {
     public class BaseModel
     {
-        public bool IsDeleted { get; set; } = false;
+        public bool IsDeleted { get; set; } 
     }
 }
