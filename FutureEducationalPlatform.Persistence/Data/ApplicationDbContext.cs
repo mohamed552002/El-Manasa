@@ -21,6 +21,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new AdminConfiguration());
         modelBuilder.ApplyConfiguration(new StudentConfiguration());
         modelBuilder.ApplyConfiguration(new SuperAdminConfiguration());
+        modelBuilder.ApplyConfiguration(new ParentConfiguration());
     }
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
@@ -28,6 +29,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Admin> Admins { get; set; }
     public DbSet<Student> Students { get; set; }
     public DbSet<SuperAdmin> SuperAdmins { get; set; }
+    public DbSet<Parent> Parents { get; set; }
 
 }
 
