@@ -21,8 +21,7 @@ namespace FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntities
                 .HasMaxLength(128);
             builder.Property(x => x.PhoneNumber)
                 .HasMaxLength(11);
-            builder.Property(x => x.ParentPhoneNumber)
-                .HasMaxLength(11);
+            builder.Property(x => x.GradeLevel);
         }
     }
 }
