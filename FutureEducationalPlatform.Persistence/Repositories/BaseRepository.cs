@@ -36,7 +36,7 @@ namespace FutureEducationalPlatform.Persistence.Repositories
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await Entites.ToListAsync();
+            return await Entites.AsNoTracking().ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(int id)

@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Domain.Entities.UserEntities
 {
-    public class Role:BaseModel
+    public class Admin:BaseModel
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public virtual IEnumerable<UserRoles> Users { get; set;}
+        public string ImageUrl { get; set; }
+        public decimal Salary { get; set; }
+        public DateTime HireDate { get; set; }= DateTime.Now;
+        public virtual User User { get; set; }
     }
 }
