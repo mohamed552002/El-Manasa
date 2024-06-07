@@ -19,10 +19,15 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
         modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
         modelBuilder.ApplyConfiguration(new AdminConfiguration());
+        modelBuilder.ApplyConfiguration(new StudentConfiguration());
+        modelBuilder.ApplyConfiguration(new SuperAdminConfiguration());
     }
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<UserRoles> UserRoles { get; set; }
     public DbSet<Admin> Admins { get; set; }
+    public DbSet<Student> Students { get; set; }
+    public DbSet<SuperAdmin> SuperAdmins { get; set; }
+
 }
 
