@@ -1,4 +1,5 @@
 ﻿using FutureEducationalPlatform.Domain.Common;
+using FutureEducationalPlatform.Domain.Entities.AuthEntites;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,6 +28,7 @@ namespace FutureEducationalPlatform.Domain.Entities.UserEntities
         public bool TwoFactorEnabled { get; set; }
         // Navigation Properties
         public virtual IEnumerable<UserRoles> Roles { get; set; }
+        public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
     }
     public enum GenderEnum
     {
