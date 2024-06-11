@@ -1,7 +1,5 @@
 using FutureEducationalPlatform.Application;
-using FutureEducationalPlatform.Application.HelperModels;
 using FutureEducationalPlatform.Persistence;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
