@@ -33,5 +33,5 @@ namespace FutureEducationalPlatform.Application.Services.HelperServices
         {
             throw new NotImplementedException();
         }
-    }
+     }
 }
