@@ -62,7 +62,7 @@ namespace FutureEducationalPlatform.Application.Services
             }
             .Union( GetUserRolesClaims(await _identityService.GetUserRoles(user)));
         }
-        public RefreshToken AssignRefreshTokenToUser(User user)
+        public RefreshToken AddRefreshTokenToUser(User user)
         {
             if (user.RefreshTokens.Any(t => t.IsActive))
                 return user.RefreshTokens.FirstOrDefault(r => r.IsActive);
