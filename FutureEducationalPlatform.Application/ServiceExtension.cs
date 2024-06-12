@@ -1,4 +1,6 @@
 ﻿using FutureEducationalPlatform.Application.HelperModels;
+using FutureEducationalPlatform.Application.Interfaces.IServices;
+using FutureEducationalPlatform.Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +37,8 @@ namespace FutureEducationalPlatform.Application
 
                 };
             });
+            services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped(typeof(IBaseService<,,,>), typeof(BaseService<,,,>));
         }
     }
 }
