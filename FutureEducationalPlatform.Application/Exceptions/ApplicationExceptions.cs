@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace FutureEducationalPlatform.Application.Exceptions
 {
@@ -13,5 +9,9 @@ namespace FutureEducationalPlatform.Application.Exceptions
     public class NoDataFoundException : Exception
     {
         public NoDataFoundException(string message):base (message) { }
+    }
+    public class ValidationErrorException : Exception
+    {
+        public ValidationErrorException(string message) : base(message) { }
     }
 }

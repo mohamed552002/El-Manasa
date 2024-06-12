@@ -28,5 +28,10 @@ namespace FutureEducationalPlatform.Application.Services.HelperServices
             Array.Copy(hashed, 0,combinedHashAndSaltBytes,Size,hashed.Length);
             return Convert.ToBase64String(combinedHashAndSaltBytes);
         }
-     }
+
+        public bool VerifyPassword(string password, string hashedPassword)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

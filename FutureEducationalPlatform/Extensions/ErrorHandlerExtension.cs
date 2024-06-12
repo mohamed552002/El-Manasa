@@ -21,6 +21,7 @@ namespace FutureEducationalPlatform.Extensions
                 {
                     EntityNotFoundException => (int)HttpStatusCode.NotFound,
                     NoDataFoundException => (int)HttpStatusCode.NotFound,
+                    ValidationErrorException => (int)HttpStatusCode.BadRequest,
                     _ => (int)HttpStatusCode.InternalServerError
                 };
                 var errorResponse = new

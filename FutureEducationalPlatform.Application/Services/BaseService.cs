@@ -3,9 +3,11 @@ using FutureEducationalPlatform.Application.Exceptions;
 using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Common;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,9 +19,9 @@ namespace FutureEducationalPlatform.Application.Services
     where TCreateDto : class
     where TUpdateDto : class
     {
-        private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IBaseRepository<TEntity> _baseRepository;
+        protected readonly IMapper _mapper;
+        protected readonly IUnitOfWork _unitOfWork;
+        protected readonly IBaseRepository<TEntity> _baseRepository;
 
         public BaseService(IMapper mapper, IUnitOfWork unitOfWork)
         {
@@ -27,7 +29,31 @@ namespace FutureEducationalPlatform.Application.Services
             _unitOfWork = unitOfWork;
             _baseRepository=_unitOfWork.GetRepository<TEntity>();
         }
+        #region Queries
+        public async Task<IEnumerable<TGetDto>> GetAllAsync()
+        {
+            return _mapper.Map<IEnumerable<TGetDto>>(await _baseRepository.GetAllAsync());
+        }
 
+        public async Task<TGetDto> GetByIdAsync(Guid id)
+        {
+            var entity = await GetEntityAsync(id);
+            return _mapper.Map<TGetDto>(entity);
+        }
+
+        public async Task<TGetDto> GetByPropertyAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null) =>
+            _mapper.Map<TGetDto>(await GetByPropertyAsyncWithoutMap(predicate, includes));
+
+
+        public async Task<TEntity> GetByPropertyAsyncWithoutMap(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null)
+        {
+            var entity = await _baseRepository.FirstOrDefaultAsync(predicate, includes);
+            CheckAndThorwException(entity);
+            return entity;
+        }
+        #endregion
+
+        #region Commands
         public async Task CreateAsync(TCreateDto createDto)
         {
             var entity=_mapper.Map<TEntity>(createDto);
@@ -49,17 +75,7 @@ namespace FutureEducationalPlatform.Application.Services
             _baseRepository.Delete(entity);
             await _unitOfWork.CompleteAsync();
         }
-
-        public async Task<IEnumerable<TGetDto>> GetAllAsync()
-        {
-            return _mapper.Map<IEnumerable<TGetDto>>(await _baseRepository.GetAllAsync());
-        }
-
-        public async Task<TGetDto> GetByIdAsync(Guid id)
-        {
-            var entity = await GetEntityAsync(id);
-            return _mapper.Map<TGetDto>(entity);
-        }
+        
 
         public async Task<TEntity> Update(Guid id,TUpdateDto updateDto)
         {
@@ -69,12 +85,20 @@ namespace FutureEducationalPlatform.Application.Services
             await _unitOfWork.CompleteAsync();
             return result;
         }
+        #endregion
+
+        #region Private Methods
         private async Task<TEntity> GetEntityAsync(Guid id)
         {
             var entity = await _baseRepository.GetByIdAsync(id);
-            if (entity == null) throw new EntityNotFoundException("No data is found");
-            if (entity.IsDeleted == true) throw new NoDataFoundException("Something went wrong");
+            CheckAndThorwException(entity);
             return entity;
         }
+        private void CheckAndThorwException(TEntity entity)
+        {
+            if (entity == null) throw new EntityNotFoundException("No data is found");
+            if (entity.IsDeleted == true) throw new NoDataFoundException("Something went wrong");
+        }
+        #endregion
     }
 }

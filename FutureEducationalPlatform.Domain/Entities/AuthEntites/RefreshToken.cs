@@ -11,7 +11,7 @@ namespace FutureEducationalPlatform.Domain.Entities.AuthEntites
     {
         public string Token { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
-        public DateTime ExpiredOn { get; set; }
+        public DateTime ExpiredOn { get; set; } = DateTime.UtcNow.AddDays(15);
         public bool IsExpired => DateTime.UtcNow >= ExpiredOn;
         public bool IsActive => IsExpired;
     }

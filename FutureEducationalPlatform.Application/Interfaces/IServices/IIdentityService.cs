@@ -1,4 +1,5 @@
-﻿using FutureEducationalPlatform.Application.Interfaces.IRepository;
+﻿using FutureEducationalPlatform.Application.DTOS.UserDtos;
+using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,13 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Interfaces.IServices
 {
-    public interface IIdentityService
+    public interface IIdentityService : IBaseService<User, GetUserDto, CreateUserDto, UpdateUserDto>
     {
         Task<User> GetByEmailAsync(string email);
         Task<User> GetByUserNameAsync(string userName);
-        Task<User> CreateUser(User user, string password);
+        Task<User> CreateUser(CreateUserDto userDto);
+        bool VerifyPassword(string password,string passwordHash);
+        Task<IEnumerable<UserRoles>> GetUserRoles(User user);
         Task<User> UpdateUser(User user);
     }
 }

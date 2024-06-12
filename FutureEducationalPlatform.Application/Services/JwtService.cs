@@ -1,6 +1,8 @@
-﻿using FutureEducationalPlatform.Application.HelperModels;
+﻿using FutureEducationalPlatform.Application.DTOS.AuthDtos;
+using FutureEducationalPlatform.Application.HelperModels;
 using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
+using FutureEducationalPlatform.Domain.Entities.AuthEntites;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -20,12 +22,12 @@ namespace FutureEducationalPlatform.Application.Services
 {
     public class JwtService : IJwtService
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly JWT _jwt;
-        public JwtService(IUnitOfWork unitOfWork, IOptions<JWT> options)
+        private readonly IIdentityService _identityService;
+        public JwtService(IOptions<JWT> options, IIdentityService identityService)
         {
-            _unitOfWork = unitOfWork;
             _jwt = options.Value;
+            _identityService = identityService;
         }
 
         public async Task<JwtSecurityToken> GenerateToken(User user)
@@ -34,14 +36,13 @@ namespace FutureEducationalPlatform.Application.Services
             var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
             return new JwtSecurityToken(_jwt.Issuer, _jwt.Audience, await GetAllTokenClaims(user), expires: DateTime.Now.AddMinutes(_jwt.DurationMinutes), signingCredentials: signingCredentials);
         }
-        public string GenerateRefreshToken()
+        public RefreshToken GenerateRefreshToken()
         {
             var randomNumber = new byte [32];
             using var rng=RandomNumberGenerator.Create();
             rng.GetBytes(randomNumber);
-            return Convert.ToBase64String(randomNumber);
+            return new RefreshToken() { Token = Convert.ToBase64String(randomNumber)} ;
         }
-        private async Task<IEnumerable<UserRoles>> GetUserRoles(User user) => await _unitOfWork.GetRepository<UserRoles>().GetAllAsync((r => r.UserId == user.Id), u => u.Include(u => u.Roles));
         private IEnumerable<Claim> GetUserRolesClaims(IEnumerable<UserRoles> userRoles)
         {
             var roleClaims = new List<Claim>();
@@ -59,8 +60,19 @@ namespace FutureEducationalPlatform.Application.Services
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim("uid", user.Id.ToString())
             }
-            .Union( GetUserRolesClaims(await GetUserRoles(user)));
+            .Union( GetUserRolesClaims(await _identityService.GetUserRoles(user)));
         }
-
+        public RefreshToken AssignRefreshTokenToUser(User user)
+        {
+            if (user.RefreshTokens.Any(t => t.IsActive))
+                return user.RefreshTokens.FirstOrDefault(r => r.IsActive);
+            else
+            {
+                var refreshToken = GenerateRefreshToken();
+                user.RefreshTokens.Add(refreshToken);
+                _identityService.UpdateUser(user);
+                return refreshToken;
+            }
+        }
     }
 }

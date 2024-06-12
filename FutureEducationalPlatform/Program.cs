@@ -12,6 +12,7 @@ builder.Services.ConfigureInfrastructure(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureApplication(builder.Configuration);
+builder.Services.ConfigureJwt(builder.Configuration);
 
 var app = builder.Build();
 
