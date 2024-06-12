@@ -1,0 +1,26 @@
+﻿using FutureEducationalPlatform.Domain.Common;
+using Microsoft.EntityFrameworkCore.Query;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FutureEducationalPlatform.Application.Interfaces.IServices
+{
+    public interface IBaseService<TEntity, TGetDto, TCreateDto, TUpdateDto>
+    where TEntity : BaseModel
+    where TGetDto : class
+    where TCreateDto : class
+    where TUpdateDto : class
+    {
+        Task<TGetDto> GetByIdAsync(Guid id);
+        Task CreateAsync(TCreateDto createDto);
+        Task<TEntity> CreateWithReturnAsync(TCreateDto createDto);
+        Task<IEnumerable<TGetDto>> GetAllAsync();
+       // Task<IEnumerable<TGetDto>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null);
+        void Delete(Guid id);
+        Task<TEntity> Update(Guid id,TUpdateDto updateDto);
+    }
+}

@@ -11,5 +11,6 @@ namespace FutureEducationalPlatform.Application.Interfaces.IServices
     public interface IJwtService
     {
         Task<JwtSecurityToken> GenerateToken(User user);
+        string GenerateRefreshToken();
     }
 }

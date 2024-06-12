@@ -10,7 +10,7 @@ namespace FutureEducationalPlatform.Application.Interfaces.IRepository
 {
     public interface IBaseRepository<T> 
     {
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(Guid id);
         Task<T> FirstOrDefaultAsync(Expression<Func<T,bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null);
         Task AddAsync(T entity);
         Task<T> AddWithReturnAsync(T entity);

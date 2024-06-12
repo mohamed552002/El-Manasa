@@ -1,4 +1,5 @@
 using FutureEducationalPlatform.Application;
+using FutureEducationalPlatform.Extensions;
 using FutureEducationalPlatform.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,8 +21,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
+app.UseErrorHandler();
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 

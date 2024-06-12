@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +34,13 @@ namespace FutureEducationalPlatform.Application.Services
             var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
             return new JwtSecurityToken(_jwt.Issuer, _jwt.Audience, await GetAllTokenClaims(user), expires: DateTime.Now.AddMinutes(_jwt.DurationMinutes), signingCredentials: signingCredentials);
         }
+        public string GenerateRefreshToken()
+        {
+            var randomNumber = new byte [32];
+            using var rng=RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
+        }
         private async Task<IEnumerable<UserRoles>> GetUserRoles(User user) => await _unitOfWork.GetRepository<UserRoles>().GetAllAsync((r => r.UserId == user.Id), u => u.Include(u => u.Roles));
         private IEnumerable<Claim> GetUserRolesClaims(IEnumerable<UserRoles> userRoles)
         {
@@ -52,7 +60,7 @@ namespace FutureEducationalPlatform.Application.Services
                 new Claim("uid", user.Id.ToString())
             }
             .Union( GetUserRolesClaims(await GetUserRoles(user)));
-
         }
+
     }
 }
