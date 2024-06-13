@@ -1,5 +1,7 @@
 ﻿
 using FutureEducationalPlatform.Application.HelperModels;
+using FutureEducationalPlatform.Application.Interfaces.IRepository;
+using FutureEducationalPlatform.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +19,9 @@ namespace FutureEducationalPlatform.Persistence
         {
 
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-            
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
         }
     }
 }

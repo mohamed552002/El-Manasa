@@ -15,11 +15,15 @@ namespace FutureEducationalPlatform.Application.Interfaces.IServices
     where TCreateDto : class
     where TUpdateDto : class
     {
+    //Queries
         Task<TGetDto> GetByIdAsync(Guid id);
+        Task<TEntity> GetByPropertyAsyncWithoutMap(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null);
+        Task<TGetDto> GetByPropertyAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null);
+        Task<IEnumerable<TGetDto>> GetAllAsync();
+    //Commands
         Task CreateAsync(TCreateDto createDto);
         Task<TEntity> CreateWithReturnAsync(TCreateDto createDto);
-        Task<IEnumerable<TGetDto>> GetAllAsync();
-       // Task<IEnumerable<TGetDto>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null);
+        //Task<IEnumerable<TGetDto>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null);
         void Delete(Guid id);
         Task<TEntity> Update(Guid id,TUpdateDto updateDto);
     }
