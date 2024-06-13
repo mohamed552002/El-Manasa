@@ -19,6 +19,7 @@ namespace FutureEducationalPlatform.Extensions
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = contextFeature.Error switch
                 {
+                    BadRequestException => (int)HttpStatusCode.BadRequest,
                     EntityNotFoundException => (int)HttpStatusCode.NotFound,
                     NoDataFoundException => (int)HttpStatusCode.NotFound,
                     ValidationErrorException => (int)HttpStatusCode.BadRequest,
@@ -28,6 +29,11 @@ namespace FutureEducationalPlatform.Extensions
                 {
                     statusCode = context.Response.StatusCode,
                     message = contextFeature.Error.GetBaseException().Message,
+                    Errors=contextFeature.Error switch
+                    {
+                        ValidationErrorException validationErrorException => validationErrorException.Errors,
+                        _=>null
+                    }
                 };
                 await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
             })

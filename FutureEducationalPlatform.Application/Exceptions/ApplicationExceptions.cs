@@ -12,6 +12,14 @@ namespace FutureEducationalPlatform.Application.Exceptions
     }
     public class ValidationErrorException : Exception
     {
-        public ValidationErrorException(string message) : base(message) { }
+        public string[] Errors { get; private set; }
+        public ValidationErrorException(string[] errors) : base("Multiple errors in Validation occurred. See error details.")
+        {
+            Errors = errors;
+        }
+    }
+    public class BadRequestException : Exception
+    {
+        public BadRequestException(string message) : base(message) { }
     }
 }

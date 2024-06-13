@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.DTOS.AuthDtos
 {
-    public record LoginDto 
+    public record LoginDto
     (
-         string Email,
-         string Password
+       string Email,
+       string Password
     );
 }

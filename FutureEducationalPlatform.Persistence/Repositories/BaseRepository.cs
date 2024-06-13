@@ -13,7 +13,7 @@ namespace FutureEducationalPlatform.Persistence.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseModel
     {
-        private readonly ApplicationDbContext _context;
+        protected readonly ApplicationDbContext _context;
         private DbSet<T> Entites;
         public BaseRepository(ApplicationDbContext context)
         {
@@ -41,12 +41,13 @@ namespace FutureEducationalPlatform.Persistence.Repositories
         {
             return await Entites.AsNoTracking().ToListAsync();
         }
-        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null)
+        public async Task<IEnumerable<T>> GetFilteredItemsAsync(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null)
         {
             var query = Entites.AsQueryable().AsNoTracking();
             if(includes != null) query = includes(query);
             return await query.Where(predicate).ToListAsync();
         }
+       
         public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null)
         {
             var query = Entites.AsQueryable();

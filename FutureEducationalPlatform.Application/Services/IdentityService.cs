@@ -16,8 +16,9 @@ namespace FutureEducationalPlatform.Application.Services
     public class IdentityService :BaseService<User,GetUserDto,CreateUserDto,UpdateUserDto>, IIdentityService
     {
         private readonly IPasswordService _passwordService;
-        public IdentityService(IUnitOfWork unitOfWork,IMapper mapper) : base(mapper,unitOfWork)
+        public IdentityService(IMapper mapper, IUnitOfWork unitOfWork, IPasswordService passwordService) : base(mapper, unitOfWork)
         {
+            _passwordService = passwordService;
         }
 
         public Task<User> GetByEmailAsync(string email)
@@ -39,12 +40,16 @@ namespace FutureEducationalPlatform.Application.Services
         {
            var result = _baseRepository.Update(user);
            await _unitOfWork.CompleteAsync();
-            return result;
+           return result;
         }
-        public async Task<IEnumerable<UserRoles>> GetUserRoles(User user) => await _unitOfWork.GetRepository<UserRoles>().GetAllAsync((r => r.UserId == user.Id), u => u.Include(u => u.Roles));
         public bool VerifyPassword(string password, string passwordHash)
         {
             return _passwordService.VerifyPassword(password, passwordHash);
+        }
+
+        public Task<IEnumerable<string>> GetUserRoles(User user)
+        {
+            return _unitOfWork.UserRepository.GetUserRoles(user);
         }
     }
 }

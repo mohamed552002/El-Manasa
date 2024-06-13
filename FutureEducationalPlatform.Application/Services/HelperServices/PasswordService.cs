@@ -31,7 +31,18 @@ namespace FutureEducationalPlatform.Application.Services.HelperServices
 
         public bool VerifyPassword(string password, string hashedPassword)
         {
-            throw new NotImplementedException();
+            byte[] combinedBytes=Convert.FromBase64String(hashedPassword);
+            byte[] salt=new byte[Size];
+            byte[] storedHash=new byte[combinedBytes.Length-Size];
+            Array.Copy(combinedBytes, 0, salt, 0, Size);
+            Array.Copy(combinedBytes,Size, storedHash, 0, storedHash.Length);
+            byte[] computedHash = KeyDerivation.Pbkdf2(password, salt, KeyDerivationPrf.HMACSHA256, Iteration, storedHash.Length);
+            for (int i = 0; i < storedHash.Length; i++)
+            {
+                if (storedHash[i] != computedHash[i])
+                    return false;
+            }
+            return true;
         }
      }
 }

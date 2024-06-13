@@ -1,5 +1,6 @@
 ﻿using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Domain.Common;
+using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace FutureEducationalPlatform.Persistence.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
+        public IUserRepository UserRepository { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
+            UserRepository=new UserRepository(_context);
         }
 
         public async Task CompleteAsync()

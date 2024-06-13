@@ -43,11 +43,11 @@ namespace FutureEducationalPlatform.Application.Services
             rng.GetBytes(randomNumber);
             return new RefreshToken() { Token = Convert.ToBase64String(randomNumber)} ;
         }
-        private IEnumerable<Claim> GetUserRolesClaims(IEnumerable<UserRoles> userRoles)
+        private IEnumerable<Claim> GetUserRolesClaims(IEnumerable<string> userRoles)
         {
             var roleClaims = new List<Claim>();
             foreach (var role in userRoles)
-                roleClaims.Add(new Claim("roles",role.Roles.Name));
+                roleClaims.Add(new Claim("roles",role));
             return roleClaims;
         }
 
@@ -62,7 +62,7 @@ namespace FutureEducationalPlatform.Application.Services
             }
             .Union( GetUserRolesClaims(await _identityService.GetUserRoles(user)));
         }
-        public RefreshToken AddRefreshTokenToUser(User user)
+        public async Task<RefreshToken> AssignRefreshTokenToUser(User user)
         {
             if (user.RefreshTokens.Any(t => t.IsActive))
                 return user.RefreshTokens.FirstOrDefault(r => r.IsActive);
@@ -70,7 +70,7 @@ namespace FutureEducationalPlatform.Application.Services
             {
                 var refreshToken = GenerateRefreshToken();
                 user.RefreshTokens.Add(refreshToken);
-                _identityService.UpdateUser(user);
+                await _identityService.UpdateUser(user);
                 return refreshToken;
             }
         }

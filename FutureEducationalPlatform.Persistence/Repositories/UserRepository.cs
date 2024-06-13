@@ -1,5 +1,6 @@
 ﻿using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,6 @@ namespace FutureEducationalPlatform.Persistence.Repositories
         {
             throw new NotImplementedException();
         }
+        public async Task<IEnumerable<string>> GetUserRoles(User user) => await _context.UserRoles.Include(ur => ur.Roles).Where(ur => ur.UserId == user.Id).Select(ur => ur.Roles.Name).ToListAsync();
     }
 }

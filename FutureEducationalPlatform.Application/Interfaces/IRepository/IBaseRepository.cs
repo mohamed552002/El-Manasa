@@ -15,7 +15,7 @@ namespace FutureEducationalPlatform.Application.Interfaces.IRepository
         Task AddAsync(T entity);
         Task<T> AddWithReturnAsync(T entity);
         Task<IEnumerable<T>> GetAllAsync();
-        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T,bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T,object>> includes = null);
+        Task<IEnumerable<T>> GetFilteredItemsAsync(Expression<Func<T,bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T,object>> includes = null);
         void Delete(T entity);
         T Update(T entity);
     }
