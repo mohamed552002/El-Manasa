@@ -40,7 +40,7 @@ namespace FutureEducationalPlatform.Controllers
         {
             await _mediator.Send(new ForgetPasswordRequest(email));
             return Ok("Forget password OTP has been sent To your email ");
-
+        }
         [HttpPost("VerifyAccount")]
         public async Task<IActionResult> VerifyAccountAsync(VerifyAccountDto verifyAccountDto)
         {

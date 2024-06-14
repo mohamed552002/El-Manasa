@@ -12,7 +12,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
         private readonly IOTPServices _otpServices;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ForgetPasswordHandler( IOTPServices otpServices, IUnitOfWork unitOfWork)
+        public ForgetPasswordHandler(IOTPServices otpServices, IUnitOfWork unitOfWork)
         {
             _otpServices = otpServices;
             _unitOfWork = unitOfWork;

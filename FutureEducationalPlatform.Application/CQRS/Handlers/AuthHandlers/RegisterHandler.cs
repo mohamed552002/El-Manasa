@@ -14,7 +14,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
     {
         private readonly IIdentityService _identityService;
         private readonly IOTPServices _otpService;
-        public RegisterHandler(IIdentityService identityService, IEmailSender emailSender, IMemoryCache memorycashe, IOTPServices otpService)
+        public RegisterHandler(IIdentityService identityService,IOTPServices otpService)
         {
             _identityService = identityService;
             _otpService = otpService;
