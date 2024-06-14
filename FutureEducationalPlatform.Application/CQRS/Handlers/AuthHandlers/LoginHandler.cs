@@ -2,17 +2,9 @@
 using FutureEducationalPlatform.Application.Common.Validators.AuthValidators;
 using FutureEducationalPlatform.Application.CQRS.Commands.AuthCommands;
 using FutureEducationalPlatform.Application.DTOS.AuthDtos;
-using FutureEducationalPlatform.Application.DTOS.UserDtos;
-using FutureEducationalPlatform.Application.Interfaces.IHelperServices;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
-using FutureEducationalPlatform.Application.Services;
-using FutureEducationalPlatform.Domain.Entities.UserEntities;
+
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
 {

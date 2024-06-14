@@ -66,7 +66,10 @@ namespace FutureEducationalPlatform.Persistence.Repositories
             Entites.Entry(entity).State = EntityState.Modified;
             return Entites.Update(entity).Entity;
         }
-
+        public async Task<bool> IsExist(Expression<Func<T,bool>> predicate)
+        {
+            return await Entites.AnyAsync(predicate);
+        }
 
     }
 }
