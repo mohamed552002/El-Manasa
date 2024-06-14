@@ -26,5 +26,6 @@ namespace FutureEducationalPlatform.Application.Interfaces.IServices
         //Task<IEnumerable<TGetDto>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null);
         void Delete(Guid id);
         Task<TEntity> Update(Guid id,TUpdateDto updateDto);
+        Task SaveChangesAsync();
     }
 }

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using FutureEducationalPlatform.Application.DTOS.UserDtos;
+using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,9 @@ namespace FutureEducationalPlatform.Application.Profiles
 {
     public class UserMappingProfile:Profile
     {
+        public UserMappingProfile()
+        {
+            CreateMap<CreateUserDto, User>();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FutureEducationalPlatform.Application.DTOS.AuthDtos;
 using FutureEducationalPlatform.Application.DTOS.UserDtos;
 using FutureEducationalPlatform.Application.Exceptions;
 using FutureEducationalPlatform.Application.Interfaces.IHelperServices;
@@ -38,11 +39,13 @@ namespace FutureEducationalPlatform.Application.Services
             var user = await CreateWithReturnAsync(userDto);
             return user;
         }
-        public async Task<User> UpdateUser(User user)
+        public override async Task<User> Update(Guid id, UpdateUserDto updateDto)
         {
-           var result = _baseRepository.Update(user);
-           await _unitOfWork.CompleteAsync();
-           return result;
+            var entity = await GetEntityAsync(id);
+            _mapper.Map(updateDto, entity);
+            var result = _unitOfWork.UserRepository.UpdateUser(entity);
+            await _unitOfWork.CompleteAsync();
+            return result;
         }
         public bool VerifyPassword(string password, string passwordHash)
         {
@@ -67,5 +70,10 @@ namespace FutureEducationalPlatform.Application.Services
             throw new NotImplementedException();
         }
 
+        public async Task AddToRoleAsync(User user, string roleName)
+        {
+            await _unitOfWork.UserRepository.AddToRoleAsync(user, roleName);
+            await _unitOfWork.CompleteAsync();
+        }
     }
 }

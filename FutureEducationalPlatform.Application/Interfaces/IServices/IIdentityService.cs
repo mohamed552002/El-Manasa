@@ -1,4 +1,5 @@
-﻿using FutureEducationalPlatform.Application.DTOS.UserDtos;
+﻿using FutureEducationalPlatform.Application.DTOS.AuthDtos;
+using FutureEducationalPlatform.Application.DTOS.UserDtos;
 using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using System;
@@ -17,7 +18,7 @@ namespace FutureEducationalPlatform.Application.Interfaces.IServices
         Task<User> CreateUser(CreateUserDto userDto);
         bool VerifyPassword(string password,string passwordHash);
         Task<IEnumerable<string>> GetUserRoles(User user);
-        Task<User> UpdateUser(User user);
         Task ChangePassword(User user, string oldPassword, string newPassword);
+        Task AddToRoleAsync(User user, string roleName);
     }
 }

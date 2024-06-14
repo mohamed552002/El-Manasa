@@ -18,7 +18,7 @@ namespace FutureEducationalPlatform.Domain.Entities.UserEntities
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime LastUpdatedAt { get; set; }
+        public DateTime LastUpdatedAt { get; set; }= DateTime.Now;
         public GenderEnum Gender { get; set; }
         public bool EmailConfirmed { get; set; }
         public string? SecurityStamp { get; set; }
