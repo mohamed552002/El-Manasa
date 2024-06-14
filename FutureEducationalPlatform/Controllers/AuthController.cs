@@ -20,6 +20,13 @@ namespace FutureEducationalPlatform.Controllers
              SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
              return Ok(result);
         }
+        [HttpPut("ChangePassword")]
+        public async Task<IActionResult> ChangePassword([FromBody]ChangePasswordDto changePasswordDto)
+        {
+            changePasswordDto.refreshToken = Request.Cookies["RefreshToken"];
+            var result =await _mediator.Send(new ChangePasswordRequest(changePasswordDto));
+            return Ok("New Password Is: " +  result);
+        }
         private void SetRefreshTokenInCookie(string refreshToken,DateTime expires)
         {
             CookieOptions cookieOptions = new CookieOptions

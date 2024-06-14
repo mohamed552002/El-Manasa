@@ -15,10 +15,14 @@ namespace FutureEducationalPlatform.Persistence.Repositories
         {
         }
 
-        public Task<User> GetUserByEmailAsync(string email)
+        public async Task<User> GetUserByRefreshTokenAsync(string refreshToken)
         {
-            throw new NotImplementedException();
+            var allUsers = await _context.Users.Include(u => u.RefreshTokens).ToListAsync();
+            var user = allUsers.SingleOrDefault(u => u.RefreshTokens.SingleOrDefault(r => r.Token == refreshToken).Token == refreshToken);
+            //var user = await _context.Users.FirstOrDefaultAsync(u => u.RefreshTokens.Where(r => r.Token == refreshToken);
+            return user;
         }
+
         public async Task<IEnumerable<string>> GetUserRoles(User user) => await _context.UserRoles.Include(ur => ur.Roles).Where(ur => ur.UserId == user.Id).Select(ur => ur.Roles.Name).ToListAsync();
     }
 }
