@@ -35,7 +35,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
             var user = await _identityService.GetByEmailAsync(request.LoginDto.Email);
             if (user == null || !_identityService.VerifyPassword(request.LoginDto.Password, user.PasswordHash) || !user.EmailConfirmed)
                 throw new BadRequestException("Wrong email or password");
-            var jwtSecurityToken = await _jwtService.GenerateToken(user);
+            var jwtSecurityToken = (await _jwtService.GenerateToken(user));
             var userRoles = await _identityService.GetUserRoles(user);
             var refreshToken =await _jwtService.AssignRefreshTokenToUser(user);
             return new AuthModel(user, refreshToken, userRoles,jwtSecurityToken);

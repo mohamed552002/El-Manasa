@@ -10,7 +10,9 @@ namespace FutureEducationalPlatform.Application.Interfaces.IRepository
     public interface IUserRepository:IBaseRepository<User>
     {
         Task<IEnumerable<string>> GetUserRoles(User user);
+        Task<User> GetUserByRefreshTokenAsync(string refreshToken);
         User UpdateUser(User user);
         Task AddToRoleAsync(User user, string roleName);
+
     }
 }

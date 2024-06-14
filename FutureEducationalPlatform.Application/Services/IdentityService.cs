@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using FutureEducationalPlatform.Application.DTOS.AuthDtos;
 using FutureEducationalPlatform.Application.DTOS.UserDtos;
+using FutureEducationalPlatform.Application.Exceptions;
 using FutureEducationalPlatform.Application.Interfaces.IHelperServices;
 using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Services
 {
-    public class IdentityService :BaseService<User,GetUserDto,CreateUserDto,UpdateUserDto>, IIdentityService
+    public class IdentityService : BaseService<User, GetUserDto, CreateUserDto, UpdateUserDto>, IIdentityService
     {
         private readonly IPasswordService _passwordService;
         public IdentityService(IMapper mapper, IUnitOfWork unitOfWork, IPasswordService passwordService) : base(mapper, unitOfWork)
@@ -49,10 +51,23 @@ namespace FutureEducationalPlatform.Application.Services
         {
             return _passwordService.VerifyPassword(password, passwordHash);
         }
-
+        public async Task ChangePassword(User user,string oldPassword,string newPassword)
+        {
+            var passwordVerfication = _passwordService.VerifyPassword(oldPassword, user.PasswordHash);
+            if (!passwordVerfication)
+                throw new BadRequestException("Old Password is wrong");
+            user.PasswordHash = _passwordService.HashPassword(newPassword);
+            _baseRepository.Update(user);
+            await _unitOfWork.CompleteAsync();
+        }
         public Task<IEnumerable<string>> GetUserRoles(User user)
         {
             return _unitOfWork.UserRepository.GetUserRoles(user);
+        }
+
+        public Task<User> GetByRefreshTokenAsync(string refreshToken)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task AddToRoleAsync(User user, string roleName)
