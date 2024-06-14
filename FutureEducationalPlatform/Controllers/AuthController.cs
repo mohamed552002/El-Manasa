@@ -40,6 +40,13 @@ namespace FutureEducationalPlatform.Controllers
         {
             await _mediator.Send(new ForgetPasswordRequest(email));
             return Ok("Forget password OTP has been sent To your email ");
+
+        [HttpPost("VerifyAccount")]
+        public async Task<IActionResult> VerifyAccountAsync(VerifyAccountDto verifyAccountDto)
+        {
+            var command=new VerifyAccountRequest(verifyAccountDto);
+            var result=await _mediator.Send(command);
+            return Ok(result);
         }
         private void SetRefreshTokenInCookie(string refreshToken,DateTime expires)
         {

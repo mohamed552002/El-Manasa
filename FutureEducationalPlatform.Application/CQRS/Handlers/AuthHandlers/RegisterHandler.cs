@@ -2,6 +2,7 @@
 using FutureEducationalPlatform.Application.Common.HelperMethods;
 using FutureEducationalPlatform.Application.Common.Validators.AuthValidators;
 using FutureEducationalPlatform.Application.CQRS.Commands.AuthCommands;
+using FutureEducationalPlatform.Application.DTOS.UserDtos;
 using FutureEducationalPlatform.Application.Interfaces.IHelperServices;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using MediatR;

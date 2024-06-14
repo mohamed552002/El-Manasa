@@ -1,4 +1,4 @@
-﻿using FutureEducationalPlatform.Application.Interfaces.IRepository;
+using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

@@ -3,6 +3,7 @@ using FutureEducationalPlatform.Application.Common.Validators.AuthValidators;
 using FutureEducationalPlatform.Application.CQRS.Commands.AuthCommands;
 using FutureEducationalPlatform.Application.DTOS.AuthDtos;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
+
 using MediatR;
 
 namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers

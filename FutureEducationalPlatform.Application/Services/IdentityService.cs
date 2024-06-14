@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FutureEducationalPlatform.Application.Common.Exceptions;
 using FutureEducationalPlatform.Application.Common.HelperMethods;
+using FutureEducationalPlatform.Application.DTOS.AuthDtos;
 using FutureEducationalPlatform.Application.DTOS.UserDtos;
 using FutureEducationalPlatform.Application.Interfaces.IHelperServices;
 using FutureEducationalPlatform.Application.Interfaces.IRepository;
