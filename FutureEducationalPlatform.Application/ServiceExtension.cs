@@ -27,6 +27,8 @@ namespace FutureEducationalPlatform.Application
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IEmailSender, EmailSender>();
             services.AddScoped<IPasswordService, PasswordService>();
+            services.AddScoped<IOTPServices, OTPServices>();
+            services.AddScoped<IPasswordService, PasswordService>();
             services.AddScoped<IJwtService, JwtService>();
         }
     }

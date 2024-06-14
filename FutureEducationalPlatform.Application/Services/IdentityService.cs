@@ -1,27 +1,22 @@
 ﻿using AutoMapper;
-using FutureEducationalPlatform.Application.DTOS.AuthDtos;
+using FutureEducationalPlatform.Application.Common.Exceptions;
+using FutureEducationalPlatform.Application.Common.HelperMethods;
 using FutureEducationalPlatform.Application.DTOS.UserDtos;
-using FutureEducationalPlatform.Application.Exceptions;
 using FutureEducationalPlatform.Application.Interfaces.IHelperServices;
 using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Services
 {
     public class IdentityService : BaseService<User, GetUserDto, CreateUserDto, UpdateUserDto>, IIdentityService
     {
         private readonly IPasswordService _passwordService;
-        public IdentityService(IMapper mapper, IUnitOfWork unitOfWork, IPasswordService passwordService) : base(mapper, unitOfWork)
+        private readonly IEmailSender _emailSender;
+        public IdentityService(IMapper mapper, IUnitOfWork unitOfWork, IPasswordService passwordService, IEmailSender emailSender) : base(mapper, unitOfWork)
         {
             _passwordService = passwordService;
+            _emailSender = emailSender;
         }
 
         public Task<User> GetByEmailAsync(string email)
@@ -50,6 +45,11 @@ namespace FutureEducationalPlatform.Application.Services
         public bool VerifyPassword(string password, string passwordHash)
         {
             return _passwordService.VerifyPassword(password, passwordHash);
+        }
+        public void SendForgetPasswordOTP(string email)
+        {
+            var code = RandomCodeGenerator.GenerateRandomCode();
+            _emailSender.SendEmail(email, "Reset Password OTP", $"Your OTP Is: {code}");
         }
         public async Task ChangePassword(User user,string oldPassword,string newPassword)
         {

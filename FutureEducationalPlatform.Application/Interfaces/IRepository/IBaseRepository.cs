@@ -18,5 +18,6 @@ namespace FutureEducationalPlatform.Application.Interfaces.IRepository
         Task<IEnumerable<T>> GetFilteredItemsAsync(Expression<Func<T,bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T,object>> includes = null);
         void Delete(T entity);
         T Update(T entity);
+        Task<bool> IsExist(Expression<Func<T, bool>> predicate);
     }
 }
