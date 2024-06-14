@@ -65,12 +65,6 @@ namespace FutureEducationalPlatform.Application.Services
         {
             return _unitOfWork.UserRepository.GetUserRoles(user);
         }
-
-        public Task<User> GetByRefreshTokenAsync(string refreshToken)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task AddToRoleAsync(User user, string roleName)
         {
             await _unitOfWork.UserRepository.AddToRoleAsync(user, roleName);

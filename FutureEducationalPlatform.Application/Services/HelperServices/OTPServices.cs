@@ -21,13 +21,13 @@ namespace FutureEducationalPlatform.Application.Services.HelperServices
             _emailSender = emailSender;
         }
 
-        public void SendOTP(string email , string subject,string entity)
+        public void SendOTP(string email,string entity)
         {
             try
             {
                 var code = RandomCodeGenerator.GenerateRandomCode();
                 _memoryCache.Set($"{entity} OTP", code, TimeSpan.FromMinutes(10));
-                _emailSender.SendEmail(email, subject, $"Your OTP Is {code}");
+                _emailSender.SendEmail(email, "رمز التحقق", $"Your OTP Is {code}");
             }
             catch
             {

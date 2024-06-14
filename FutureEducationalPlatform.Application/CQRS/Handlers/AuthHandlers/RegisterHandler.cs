@@ -28,7 +28,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
             if (await _identityService.GetByUserNameAsync(request.CreateUserDto.UserName) != null|| await _identityService.GetByEmailAsync(request.CreateUserDto.Email) != null) throw new BadRequestException("Email or userName is already exist");
             var user = await _identityService.CreateUser(request.CreateUserDto);
             await _identityService.AddToRoleAsync(user, "Student");
-            _otpService.SendOTP(user.Email, "Verfication OTP",user.Id.ToString());
+            _otpService.SendOTP(user.Email,user.Id.ToString());
             return "Verification code has been sent to your email.";
         }
     }

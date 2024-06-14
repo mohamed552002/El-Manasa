@@ -14,7 +14,6 @@ namespace FutureEducationalPlatform.Application.Interfaces.IServices
     {
         Task<User> GetByEmailAsync(string email);
         Task<User> GetByUserNameAsync(string userName);
-        Task<User> GetByRefreshTokenAsync(string refreshToken);
         Task<User> CreateUser(CreateUserDto userDto);
         bool VerifyPassword(string password,string passwordHash);
         Task<IEnumerable<string>> GetUserRoles(User user);
