@@ -8,9 +8,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FutureEducationalPlatform.Application.Validators.AuthValidators
+namespace FutureEducationalPlatform.Application.Common.Validators.AuthValidators
 {
-    public class RegisterValidator:AbstractValidator<CreateUserDto>
+    public class RegisterValidator : AbstractValidator<CreateUserDto>
     {
         public RegisterValidator()
         {
@@ -25,11 +25,11 @@ namespace FutureEducationalPlatform.Application.Validators.AuthValidators
             AddNameRule(r => r.FirstName, "FirstName");
             AddNameRule(r => r.LastName, "LastName");
             AddNameRule(r => r.UserName, "UserName");
-            RuleFor(r=>r.Gender)
+            RuleFor(r => r.Gender)
                 .IsInEnum()
                 .WithMessage("Invalid value gender");
         }
-        private void AddNameRule(Expression<Func<CreateUserDto, string>> expression,string fieldName)
+        private void AddNameRule(Expression<Func<CreateUserDto, string>> expression, string fieldName)
         {
             RuleFor(expression)
                 .Length(2, 16)

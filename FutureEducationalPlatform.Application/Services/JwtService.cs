@@ -1,5 +1,5 @@
-﻿using FutureEducationalPlatform.Application.DTOS.AuthDtos;
-using FutureEducationalPlatform.Application.HelperModels;
+﻿using FutureEducationalPlatform.Application.Common.HelperModels;
+using FutureEducationalPlatform.Application.DTOS.AuthDtos;
 using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Entities.AuthEntites;

@@ -1,12 +1,11 @@
 ﻿using FluentValidation;
+using FutureEducationalPlatform.Application.Common.HelperModels;
 using FutureEducationalPlatform.Application.DTOS.AuthDtos;
-using FutureEducationalPlatform.Application.HelperModels;
 using FutureEducationalPlatform.Application.Interfaces.IHelperServices;
 using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Application.Services;
 using FutureEducationalPlatform.Application.Services.HelperServices;
-using FutureEducationalPlatform.Application.Validators.AuthValidators;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;

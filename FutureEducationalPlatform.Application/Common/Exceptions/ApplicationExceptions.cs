@@ -1,14 +1,12 @@
-﻿
-
-namespace FutureEducationalPlatform.Application.Exceptions
+﻿namespace FutureEducationalPlatform.Application.Common.Exceptions
 {
-    public class EntityNotFoundException: Exception
+    public class EntityNotFoundException : Exception
     {
-        public EntityNotFoundException(string message):base(message) { }
+        public EntityNotFoundException(string message) : base(message) { }
     }
     public class NoDataFoundException : Exception
     {
-        public NoDataFoundException(string message):base (message) { }
+        public NoDataFoundException(string message) : base(message) { }
     }
     public class ValidationErrorException : Exception
     {
