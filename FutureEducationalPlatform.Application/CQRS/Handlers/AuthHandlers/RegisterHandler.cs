@@ -1,4 +1,5 @@
-﻿using FutureEducationalPlatform.Application.CQRS.Commands.AuthCommands;
+﻿using FutureEducationalPlatform.Application.Common.HelperMethods;
+using FutureEducationalPlatform.Application.CQRS.Commands.AuthCommands;
 using FutureEducationalPlatform.Application.DTOS.UserDtos;
 using FutureEducationalPlatform.Application.Exceptions;
 using FutureEducationalPlatform.Application.HelperModels;

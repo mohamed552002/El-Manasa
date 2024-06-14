@@ -16,9 +16,7 @@ namespace FutureEducationalPlatform.Persistence.Repositories
         }
         public async Task<User> GetUserByRefreshTokenAsync(string refreshToken)
         {
-            var allUsers = await _context.Users.Include(u => u.RefreshTokens).ToListAsync();
-            var user = allUsers.SingleOrDefault(u => u.RefreshTokens.SingleOrDefault(r => r.Token == refreshToken).Token == refreshToken);
-            //var user = await _context.Users.FirstOrDefaultAsync(u => u.RefreshTokens.Where(r => r.Token == refreshToken);
+            var user =await _context.Users.Include(u => u.RefreshTokens).FirstOrDefaultAsync(u => u.RefreshTokens.Any(r => r.Token == refreshToken));
             return user;
         }
 

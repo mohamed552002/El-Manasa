@@ -7,7 +7,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using FutureEducationalPlatform.Application.HelperModels;
+using FutureEducationalPlatform.Application.Common.HelperModels;
 
 namespace FutureEducationalPlatform.Application.Services.HelperServices
 {

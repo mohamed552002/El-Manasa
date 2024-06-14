@@ -1,4 +1,4 @@
-﻿using FutureEducationalPlatform.Application.HelperModels;
+﻿using FutureEducationalPlatform.Application.Common.HelperModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;

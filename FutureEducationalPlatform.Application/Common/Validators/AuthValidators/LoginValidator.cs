@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FutureEducationalPlatform.Application.Validators.AuthValidators
+namespace FutureEducationalPlatform.Application.Common.Validators.AuthValidators
 {
     public class LoginValidator : AbstractValidator<LoginDto>
     {
