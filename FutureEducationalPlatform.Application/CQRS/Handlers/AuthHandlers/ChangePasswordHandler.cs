@@ -1,5 +1,5 @@
-﻿using FutureEducationalPlatform.Application.CQRS.Commands.AuthCommands;
-using FutureEducationalPlatform.Application.Exceptions;
+﻿using FutureEducationalPlatform.Application.Common.Exceptions;
+using FutureEducationalPlatform.Application.CQRS.Commands.AuthCommands;
 using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;

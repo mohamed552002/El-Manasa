@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FutureEducationalPlatform.Application.Exceptions;
+using FutureEducationalPlatform.Application.Common.Exceptions;
 using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Common;

@@ -10,7 +10,7 @@ namespace FutureEducationalPlatform.Application.Common.HelperMethods
     {
         public static string GenerateRandomCode()
         {
-            const string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            const string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
             const string numbers = "0123456789";
             const int codeLength = 6;
 
