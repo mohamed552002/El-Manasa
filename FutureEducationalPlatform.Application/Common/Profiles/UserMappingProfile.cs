@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FutureEducationalPlatform.Application.Profiles
+namespace FutureEducationalPlatform.Application.Common.Profiles
 {
-    public class UserMappingProfile:Profile
+    public class UserMappingProfile : Profile
     {
         public UserMappingProfile()
         {
