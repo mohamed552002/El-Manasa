@@ -70,7 +70,7 @@ namespace FutureEducationalPlatform.Application.Services
             {
                 var refreshToken = GenerateRefreshToken();
                 user.RefreshTokens.Add(refreshToken);
-                await _identityService.UpdateUser(user);
+                await _identityService.SaveChangesAsync();
                 return refreshToken;
             }
         }

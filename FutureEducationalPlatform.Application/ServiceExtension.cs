@@ -19,12 +19,14 @@ namespace FutureEducationalPlatform.Application
 {
     public static class ServiceExtension
     {
-        public static void ConfigureApplication(this IServiceCollection services)
+        public static void ConfigureApplication(this IServiceCollection services,IConfiguration configuration)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            services.Configure<MessageSender>(configuration.GetSection("MessageSender"));
             services.AddScoped(typeof(IBaseService<,,,>), typeof(BaseService<,,,>));
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IEmailSender, EmailSender>();
             services.AddScoped<IPasswordService, PasswordService>();
             services.AddScoped<IJwtService, JwtService>();
         }

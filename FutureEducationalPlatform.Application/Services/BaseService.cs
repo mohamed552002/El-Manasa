@@ -77,7 +77,7 @@ namespace FutureEducationalPlatform.Application.Services
         }
         
 
-        public async Task<TEntity> Update(Guid id,TUpdateDto updateDto)
+        public virtual async Task<TEntity> Update(Guid id,TUpdateDto updateDto)
         {
             var entity = await GetEntityAsync(id);
             _mapper.Map(updateDto, entity);
@@ -85,10 +85,14 @@ namespace FutureEducationalPlatform.Application.Services
             await _unitOfWork.CompleteAsync();
             return result;
         }
+        public async Task SaveChangesAsync()
+        {
+            await _unitOfWork.CompleteAsync();
+        }
         #endregion
 
         #region Private Methods
-        private async Task<TEntity> GetEntityAsync(Guid id)
+        protected async Task<TEntity> GetEntityAsync(Guid id)
         {
             var entity = await _baseRepository.GetByIdAsync(id);
             CheckAndThorwException(entity);

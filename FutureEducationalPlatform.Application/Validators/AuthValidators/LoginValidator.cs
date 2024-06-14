@@ -12,7 +12,7 @@ namespace FutureEducationalPlatform.Application.Validators.AuthValidators
     {
         public LoginValidator()
         {
-            RuleFor(le => le.Email).EmailAddress().WithMessage("Please enter email here");
+            RuleFor(le => le.Email).EmailAddress().WithMessage("Please enter valid email");
             RuleFor(lp => lp.Password)
                     .NotEmpty().WithMessage("Password must not be empty")
                     .MinimumLength(8).WithMessage("Password must be at least 8 characters long")
