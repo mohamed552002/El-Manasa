@@ -70,9 +70,16 @@ namespace FutureEducationalPlatform.Application.Services
             {
                 var refreshToken = GenerateRefreshToken();
                 user.RefreshTokens.Add(refreshToken);
-                await _identityService.SaveChangesAsync();
+                await _identityService.UpdateUser(user);
                 return refreshToken;
             }
+        }
+        public async Task<AuthModel> GetAuthModel(User user)
+        {
+            var jwtSecurityToken = await GenerateToken(user);
+            var userRoles = await _identityService.GetUserRoles(user);
+            var refreshToken = await AssignRefreshTokenToUser(user);
+            return new AuthModel(user, refreshToken, userRoles, jwtSecurityToken);
         }
     }
 }

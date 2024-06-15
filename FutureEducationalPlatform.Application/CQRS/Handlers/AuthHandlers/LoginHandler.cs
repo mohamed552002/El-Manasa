@@ -21,16 +21,10 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
 
         public async Task<AuthModel> Handle(LoginRequest request, CancellationToken cancellationToken)
         {
-            var validator = new LoginValidator();
-            var result = await validator.ValidateAsync(request.LoginDto);
-            if (result.Errors.Any())  throw new ValidationErrorException(result.Errors.Select(e=>e.ErrorMessage).ToArray());
             var user = await _identityService.GetByEmailAsync(request.LoginDto.Email);
             if (user == null || !_identityService.VerifyPassword(request.LoginDto.Password, user.PasswordHash) || !user.EmailConfirmed)
                 throw new BadRequestException("Wrong email or password");
-            var jwtSecurityToken = (await _jwtService.GenerateToken(user));
-            var userRoles = await _identityService.GetUserRoles(user);
-            var refreshToken =await _jwtService.AssignRefreshTokenToUser(user);
-            return new AuthModel(user, refreshToken, userRoles,jwtSecurityToken);
+            return await _jwtService.GetAuthModel(user);
         }
     }
 }

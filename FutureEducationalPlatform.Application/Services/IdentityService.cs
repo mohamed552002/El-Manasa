@@ -35,11 +35,10 @@ namespace FutureEducationalPlatform.Application.Services
             var user = await CreateWithReturnAsync(userDto);
             return user;
         }
-        public override async Task<User> Update(Guid id, UpdateUserDto updateDto)
+        public async Task<User> UpdateUser(User user)
         {
-            var entity = await GetEntityAsync(id);
-            _mapper.Map(updateDto, entity);
-            var result = _unitOfWork.UserRepository.UpdateUser(entity);
+            user.LastUpdatedAt = DateTime.UtcNow;
+            var result =_baseRepository.Update(user);
             await _unitOfWork.CompleteAsync();
             return result;
         }
@@ -65,12 +64,6 @@ namespace FutureEducationalPlatform.Application.Services
         {
             return _unitOfWork.UserRepository.GetUserRoles(user);
         }
-
-        public Task<User> GetByRefreshTokenAsync(string refreshToken)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task AddToRoleAsync(User user, string roleName)
         {
             await _unitOfWork.UserRepository.AddToRoleAsync(user, roleName);

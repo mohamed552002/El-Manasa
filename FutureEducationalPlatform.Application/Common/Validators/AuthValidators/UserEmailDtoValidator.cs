@@ -9,14 +9,11 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Common.Validators.AuthValidators
 {
-    public class VerifyAccountDtoValidator:AbstractValidator<VerifyAccountRequest>
+    public class UserEmailDtoValidator:AbstractValidator<ResendVerificationCodeRequest>
     {
-        public VerifyAccountDtoValidator()
+        public UserEmailDtoValidator()
         {
-            RuleFor(r => r.VerifyAccountDto.Email).EmailAddress().WithMessage("Please enter valid email");
-            RuleFor(r => r.VerifyAccountDto.VerificationCode)
-                .Length(6)
-                .WithMessage("Please enter valid verificationcode");
+            RuleFor(r => r.UserEmailDto.Email).EmailAddress().WithMessage("Please enter valid email");
         }
     }
 }
