@@ -2,6 +2,7 @@
 using FutureEducationalPlatform.Application.Common.Validators.AuthValidators;
 using FutureEducationalPlatform.Application.CQRS.Commands.AuthCommands;
 using FutureEducationalPlatform.Application.DTOS.AuthDtos;
+using FutureEducationalPlatform.Application.Interfaces.IHelperServices;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using MediatR;
@@ -17,22 +18,21 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
     public class VerifyAccountHandler : IRequestHandler<VerifyAccountRequest, AuthModel>
     {
         private readonly IIdentityService _identityService;
-        private readonly IMemoryCache _memoryCache;
         private readonly IJwtService _jwtService;
+        private readonly IOTPServices _otpServices;
 
-        public VerifyAccountHandler(IIdentityService identityService, IMemoryCache memoryCache, IJwtService jwtService)
+        public VerifyAccountHandler(IIdentityService identityService, IJwtService jwtService, IOTPServices otpServices)
         {
             _identityService = identityService;
-            _memoryCache = memoryCache;
             _jwtService = jwtService;
+            _otpServices = otpServices;
         }
 
         public async Task<AuthModel> Handle(VerifyAccountRequest request, CancellationToken cancellationToken)
         {
             var user=await _identityService.GetByEmailAsync(request.VerifyAccountDto.Email);
             if (user == null) throw new EntityNotFoundException("Wrong email");
-            if (!_memoryCache.TryGetValue($"{user.Id} OTP", out string cashedCode)) throw new NoDataFoundException("Verification code was not found or has expired");
-            if (request.VerifyAccountDto.VerificationCode != cashedCode) throw new BadRequestException("Please enter valid verificationcode");
+            _otpServices.VerifyOTP(user.Id.ToString(),request.VerifyAccountDto.VerificationCode);
             user.EmailConfirmed = true;
             return await _jwtService.GetAuthModel(user);
         }

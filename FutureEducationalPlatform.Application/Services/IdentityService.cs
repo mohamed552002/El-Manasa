@@ -57,8 +57,7 @@ namespace FutureEducationalPlatform.Application.Services
             if (!passwordVerfication)
                 throw new BadRequestException("Old Password is wrong");
             user.PasswordHash = _passwordService.HashPassword(newPassword);
-            _baseRepository.Update(user);
-            await _unitOfWork.CompleteAsync();
+            await UpdateUser(user);
         }
         public Task<IEnumerable<string>> GetUserRoles(User user)
         {
