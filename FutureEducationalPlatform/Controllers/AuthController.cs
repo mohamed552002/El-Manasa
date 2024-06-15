@@ -48,8 +48,14 @@ namespace FutureEducationalPlatform.Controllers
             var result=await _mediator.Send(command);
             return Ok(result);
         }
-        [HttpPatch("")]
 
+        [HttpPost("ResendVerificationCode")]
+        public async Task<IActionResult> ResendVerificationCodeAsync(ResendVerificationCodeDto resendVerificationCodeDto)
+        {
+            var command=new ResendVerificationCodeRequest(resendVerificationCodeDto);
+            var result=await _mediator.Send(command);
+            return Ok(result);
+        }
         private void SetRefreshTokenInCookie(string refreshToken,DateTime expires)
         {
             CookieOptions cookieOptions = new CookieOptions

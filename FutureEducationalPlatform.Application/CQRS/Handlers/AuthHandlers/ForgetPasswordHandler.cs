@@ -22,7 +22,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
         {
             if (!await _unitOfWork.UserRepository.IsExist(u => u.Email == request.email))
                 throw new EntityNotFoundException("Wrong Email");
-            _otpServices.SendOTP(request.email,"Your OTP Is",request.email);
+            _otpServices.SendOTP(request.email,request.email);
         }
     }
 }
