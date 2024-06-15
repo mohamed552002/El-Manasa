@@ -35,11 +35,10 @@ namespace FutureEducationalPlatform.Application.Services
             var user = await CreateWithReturnAsync(userDto);
             return user;
         }
-        public override async Task<User> Update(Guid id, UpdateUserDto updateDto)
+        public async Task<User> UpdateUser(User user)
         {
-            var entity = await GetEntityAsync(id);
-            _mapper.Map(updateDto, entity);
-            var result = _unitOfWork.UserRepository.UpdateUser(entity);
+            user.LastUpdatedAt = DateTime.UtcNow;
+            var result =_baseRepository.Update(user);
             await _unitOfWork.CompleteAsync();
             return result;
         }

@@ -19,5 +19,6 @@ namespace FutureEducationalPlatform.Application.Interfaces.IServices
         Task<IEnumerable<string>> GetUserRoles(User user);
         Task ChangePassword(User user, string oldPassword, string newPassword);
         Task AddToRoleAsync(User user, string roleName);
+        Task<User> UpdateUser(User user);
     }
 }
