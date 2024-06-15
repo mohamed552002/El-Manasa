@@ -10,11 +10,11 @@ namespace FutureEducationalPlatform.Application.CQRS.Commands.AuthCommands
 {
     public class ResendVerificationCodeRequest:IRequest<string>
     {
-        public ResendVerificationCodeDto ResendVerificationCodeDto { get; }
+        public UserEmailDto UserEmailDto { get; }
 
-        public ResendVerificationCodeRequest(ResendVerificationCodeDto resendVerificationCodeDto)
+        public ResendVerificationCodeRequest(UserEmailDto userEmailDto)
         {
-            ResendVerificationCodeDto = resendVerificationCodeDto;
+            UserEmailDto = userEmailDto;
         }
     }
 }

@@ -25,7 +25,6 @@ namespace FutureEducationalPlatform.Application
     {
         public static void ConfigureApplication(this IServiceCollection services,IConfiguration configuration)
         {
-            var validatorAssembly = Assembly.GetExecutingAssembly();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.Configure<MessageSender>(configuration.GetSection("MessageSender"));
@@ -34,7 +33,6 @@ namespace FutureEducationalPlatform.Application
             services.AddScoped(typeof(IBaseService<,,,>), typeof(BaseService<,,,>));
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IEmailSender, EmailSender>();
-            services.AddScoped<IPasswordService, PasswordService>();
             services.AddScoped<IOTPServices, OTPServices>();
             services.AddScoped<IPasswordService, PasswordService>();
             services.AddScoped<IJwtService, JwtService>();

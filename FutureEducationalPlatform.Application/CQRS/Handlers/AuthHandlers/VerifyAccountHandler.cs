@@ -29,9 +29,6 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
 
         public async Task<AuthModel> Handle(VerifyAccountRequest request, CancellationToken cancellationToken)
         {
-            var validator=new VerifyAccountDtoValidator();
-            var result = await validator.ValidateAsync(request.VerifyAccountDto);
-            if(result.Errors.Any()) throw new ValidationErrorException(result.Errors.Select(e=>e.ErrorMessage).ToArray());
             var user=await _identityService.GetByEmailAsync(request.VerifyAccountDto.Email);
             if (user == null) throw new EntityNotFoundException("Wrong email");
             if (!_memoryCache.TryGetValue($"{user.Id} OTP", out string cashedCode)) throw new NoDataFoundException("Verification code was not found or has expired");

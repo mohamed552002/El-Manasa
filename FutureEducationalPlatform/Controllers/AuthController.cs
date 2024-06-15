@@ -50,9 +50,9 @@ namespace FutureEducationalPlatform.Controllers
         }
 
         [HttpPost("ResendVerificationCode")]
-        public async Task<IActionResult> ResendVerificationCodeAsync(ResendVerificationCodeDto resendVerificationCodeDto)
+        public async Task<IActionResult> ResendVerificationCodeAsync(UserEmailDto userEmailDto)
         {
-            var command=new ResendVerificationCodeRequest(resendVerificationCodeDto);
+            var command=new ResendVerificationCodeRequest(userEmailDto);
             var result=await _mediator.Send(command);
             return Ok(result);
         }

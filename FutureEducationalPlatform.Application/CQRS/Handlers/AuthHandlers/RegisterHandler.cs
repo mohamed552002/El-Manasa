@@ -22,9 +22,6 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
 
         public async Task<string> Handle(RegisterRequest request, CancellationToken cancellationToken)
         {
-            var validator = new RegisterValidator();
-            var result = await validator.ValidateAsync(request.CreateUserDto);
-            if (result.Errors.Any()) throw new ValidationErrorException(result.Errors.Select(e => e.ErrorMessage).ToArray());
             if (await _identityService.GetByUserNameAsync(request.CreateUserDto.UserName) != null|| await _identityService.GetByEmailAsync(request.CreateUserDto.Email) != null) throw new BadRequestException("Email or userName is already exist");
             var user = await _identityService.CreateUser(request.CreateUserDto);
             await _identityService.AddToRoleAsync(user, "Student");

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.DTOS.AuthDtos
 {
-    public record ResendVerificationCodeDto(
+    public record UserEmailDto(
         string Email
         );
 }

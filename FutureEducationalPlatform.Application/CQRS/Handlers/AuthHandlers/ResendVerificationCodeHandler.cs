@@ -24,10 +24,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
 
         public async Task<string> Handle(ResendVerificationCodeRequest request, CancellationToken cancellationToken)
         {
-            var validator=new ResendVerificationCodeDtoValidator();
-            var result = await validator.ValidateAsync(request.ResendVerificationCodeDto);
-            if(result.Errors.Any()) throw new ValidationErrorException(result.Errors.Select(e=>e.ErrorMessage).ToArray());
-            var user=await _identityService.GetByEmailAsync(request.ResendVerificationCodeDto.Email);
+            var user=await _identityService.GetByEmailAsync(request.UserEmailDto.Email);
             if (user == null) throw new EntityNotFoundException("Wrong email");
             _otpService.SendOTP(user.Email, user.Id.ToString());
             return "Verification code has been sent again";
