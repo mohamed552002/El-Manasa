@@ -21,12 +21,6 @@ namespace FutureEducationalPlatform.Persistence.Repositories
         }
 
         public async Task<IEnumerable<string>> GetUserRoles(User user) => await _context.UserRoles.Include(ur => ur.Roles).Where(ur => ur.UserId == user.Id).Select(ur => ur.Roles.Name).ToListAsync();
-        public User UpdateUser(User user)
-        {
-            var result=Update(user);
-            result.LastUpdatedAt = DateTime.Now;
-            return result;
-        }
         public async Task AddToRoleAsync(User user,string roleName)
         {
             var role=await _context.Roles.FirstOrDefaultAsync(r=>r.Name.ToLower().Trim()==roleName.ToLower().Trim());

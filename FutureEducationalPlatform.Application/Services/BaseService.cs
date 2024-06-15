@@ -72,17 +72,13 @@ namespace FutureEducationalPlatform.Application.Services
         }
         
 
-        public virtual async Task<TEntity> Update(Guid id,TUpdateDto updateDto)
+        public async Task<TEntity> Update(Guid id,TUpdateDto updateDto)
         {
             var entity = await GetEntityAsync(id);
             _mapper.Map(updateDto, entity);
             var result= _baseRepository.Update(entity);
             await _unitOfWork.CompleteAsync();
             return result;
-        }
-        public async Task SaveChangesAsync()
-        {
-            await _unitOfWork.CompleteAsync();
         }
         #endregion
 

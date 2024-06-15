@@ -1,9 +1,7 @@
 ﻿using FutureEducationalPlatform.Application.CQRS.Commands.AuthCommands;
 using FutureEducationalPlatform.Application.DTOS.AuthDtos;
 using FutureEducationalPlatform.Application.DTOS.UserDtos;
-using FutureEducationalPlatform.Domain.Entities.AuthEntites;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FutureEducationalPlatform.Controllers
@@ -31,8 +29,8 @@ namespace FutureEducationalPlatform.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterAsync(CreateUserDto userDto)
         {
-            var command=new RegisterRequest(userDto);
-            var result=await _mediator.Send(command);
+            var command= new RegisterRequest(userDto);
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
         [HttpPost("ForgetPassword")]
@@ -54,6 +52,12 @@ namespace FutureEducationalPlatform.Controllers
         {
             var command=new ResendVerificationCodeRequest(userEmailDto);
             var result=await _mediator.Send(command);
+            return Ok(result);
+        }
+        [HttpPut("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+        {
+            var result =await _mediator.Send(new ResetPasswordRequest(resetPasswordDto));
             return Ok(result);
         }
         private void SetRefreshTokenInCookie(string refreshToken,DateTime expires)

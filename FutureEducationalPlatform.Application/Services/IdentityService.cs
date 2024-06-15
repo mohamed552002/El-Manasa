@@ -35,11 +35,10 @@ namespace FutureEducationalPlatform.Application.Services
             var user = await CreateWithReturnAsync(userDto);
             return user;
         }
-        public override async Task<User> Update(Guid id, UpdateUserDto updateDto)
-        {
-            var entity = await GetEntityAsync(id);
-            _mapper.Map(updateDto, entity);
-            var result = _unitOfWork.UserRepository.UpdateUser(entity);
+        public  async Task<User> UpdateUser(User user)
+        { 
+            user.LastUpdatedAt = DateTime.UtcNow;
+            var result = _baseRepository.Update(user);
             await _unitOfWork.CompleteAsync();
             return result;
         }
@@ -58,8 +57,7 @@ namespace FutureEducationalPlatform.Application.Services
             if (!passwordVerfication)
                 throw new BadRequestException("Old Password is wrong");
             user.PasswordHash = _passwordService.HashPassword(newPassword);
-            _baseRepository.Update(user);
-            await _unitOfWork.CompleteAsync();
+            await UpdateUser(user);
         }
         public Task<IEnumerable<string>> GetUserRoles(User user)
         {
