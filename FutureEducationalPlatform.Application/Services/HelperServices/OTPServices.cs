@@ -1,6 +1,8 @@
 ﻿using FutureEducationalPlatform.Application.Common.Exceptions;
 using FutureEducationalPlatform.Application.Common.HelperMethods;
 using FutureEducationalPlatform.Application.Interfaces.IHelperServices;
+using FutureEducationalPlatform.Domain.Entities.UserEntities;
+using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
@@ -33,6 +35,13 @@ namespace FutureEducationalPlatform.Application.Services.HelperServices
             {
                 new BadRequestException("Something went wrong Please try again");
             }
+        }
+
+        public bool VerifyOTP(string entity,string OTP)
+        {
+            if (!_memoryCache.TryGetValue($"{entity} OTP", out string cashedCode)) throw new NoDataFoundException("Verification code was not found or has expired");
+            if (OTP != cashedCode) throw new BadRequestException("Please enter valid verificationcode");
+            return true;
         }
     }
 }

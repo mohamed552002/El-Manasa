@@ -15,6 +15,7 @@ namespace FutureEducationalPlatform.Application.Interfaces.IServices
         Task<User> GetByEmailAsync(string email);
         Task<User> GetByUserNameAsync(string userName);
         Task<User> CreateUser(CreateUserDto userDto);
+        Task<User> UpdateUser(User user);
         bool VerifyPassword(string password,string passwordHash);
         Task<IEnumerable<string>> GetUserRoles(User user);
         Task ChangePassword(User user, string oldPassword, string newPassword);
