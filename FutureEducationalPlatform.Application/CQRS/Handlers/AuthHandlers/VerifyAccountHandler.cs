@@ -34,12 +34,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
             if (user == null) throw new EntityNotFoundException("Wrong email");
             _otpServices.VerifyOTP(user.Id.ToString(),request.VerifyAccountDto.VerificationCode);
             user.EmailConfirmed = true;
-            var refreshToken = _jwtService.GenerateRefreshToken();
-            user.RefreshTokens.Add(refreshToken);
-            //await _identityService.SaveChangesAsync();
-            var jwtSecurityToken =await _jwtService.GenerateToken(user);
-            var userRoles=await _identityService.GetUserRoles(user);
-            return new AuthModel(user, refreshToken, userRoles, jwtSecurityToken);
+            return await _jwtService.GetAuthModel(user);
         }
     }
 }

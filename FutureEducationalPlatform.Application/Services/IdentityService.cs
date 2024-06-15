@@ -35,10 +35,10 @@ namespace FutureEducationalPlatform.Application.Services
             var user = await CreateWithReturnAsync(userDto);
             return user;
         }
-        public  async Task<User> UpdateUser(User user)
-        { 
+        public async Task<User> UpdateUser(User user)
+        {
             user.LastUpdatedAt = DateTime.UtcNow;
-            var result = _baseRepository.Update(user);
+            var result =_baseRepository.Update(user);
             await _unitOfWork.CompleteAsync();
             return result;
         }
