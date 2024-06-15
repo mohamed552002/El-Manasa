@@ -34,12 +34,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
             if (!_memoryCache.TryGetValue($"{user.Id} OTP", out string cashedCode)) throw new NoDataFoundException("Verification code was not found or has expired");
             if (request.VerifyAccountDto.VerificationCode != cashedCode) throw new BadRequestException("Please enter valid verificationcode");
             user.EmailConfirmed = true;
-            var refreshToken = _jwtService.GenerateRefreshToken();
-            user.RefreshTokens.Add(refreshToken);
-            await _identityService.SaveChangesAsync();
-            var jwtSecurityToken =await _jwtService.GenerateToken(user);
-            var userRoles=await _identityService.GetUserRoles(user);
-            return new AuthModel(user, refreshToken, userRoles, jwtSecurityToken);
+            return await _jwtService.GetAuthModel(user);
         }
     }
 }
