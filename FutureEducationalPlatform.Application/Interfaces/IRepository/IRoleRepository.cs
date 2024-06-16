@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Interfaces.IRepository
 {
-    public interface IUserRepository
+    public interface IRoleRepository
     {
-        Task<User> GetUserByRefreshTokenAsync(string refreshToken);
+        Task<IEnumerable<string>> GetUserRoles(User user);
+        Task AddToRoleAsync(User user, string roleName);
     }
 }

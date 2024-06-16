@@ -23,11 +23,13 @@ namespace FutureEducationalPlatform.Application.Services
     public class JwtService : IJwtService
     {
         private readonly JWT _jwt;
-        private readonly IIdentityService _identityService;
-        public JwtService(IOptions<JWT> options, IIdentityService identityService)
+        private readonly IRoleService _roleService;
+        private readonly IUserService _userService;
+        public JwtService(IOptions<JWT> options, IRoleService roleService, IUserService userService)
         {
             _jwt = options.Value;
-            _identityService = identityService;
+            _roleService = roleService;
+            _userService = userService;
         }
 
         public async Task<JwtSecurityToken> GenerateToken(User user)
@@ -60,7 +62,7 @@ namespace FutureEducationalPlatform.Application.Services
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim("uid", user.Id.ToString())
             }
-            .Union( GetUserRolesClaims(await _identityService.GetUserRoles(user)));
+            .Union( GetUserRolesClaims(await _roleService.GetUserRoles(user)));
         }
         public async Task<RefreshToken> AssignRefreshTokenToUser(User user)
         {
@@ -70,9 +72,16 @@ namespace FutureEducationalPlatform.Application.Services
             {
                 var refreshToken = GenerateRefreshToken();
                 user.RefreshTokens.Add(refreshToken);
-                await _identityService.SaveChangesAsync();
+                await _userService.Update(user);
                 return refreshToken;
             }
+        }
+        public async Task<AuthModel> GetAuthModel(User user)
+        {
+            var jwtSecurityToken = await GenerateToken(user);
+            var userRoles = await _roleService.GetUserRoles(user);
+            var refreshToken = await AssignRefreshTokenToUser(user);
+            return new AuthModel(user, refreshToken, userRoles, jwtSecurityToken);
         }
     }
 }

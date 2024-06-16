@@ -1,6 +1,8 @@
 ﻿using FutureEducationalPlatform.Application.Common.Exceptions;
 using FutureEducationalPlatform.Application.Common.HelperMethods;
 using FutureEducationalPlatform.Application.Interfaces.IHelperServices;
+using FutureEducationalPlatform.Domain.Entities.UserEntities;
+using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
@@ -21,18 +23,25 @@ namespace FutureEducationalPlatform.Application.Services.HelperServices
             _emailSender = emailSender;
         }
 
-        public void SendOTP(string email , string subject,string entity)
+        public void SendOTP(string email,string entity)
         {
             try
             {
                 var code = RandomCodeGenerator.GenerateRandomCode();
                 _memoryCache.Set($"{entity} OTP", code, TimeSpan.FromMinutes(10));
-                _emailSender.SendEmail(email, subject, $"Your OTP Is {code}");
+                _emailSender.SendEmail(email, "رمز التحقق", $"Your OTP Is {code}");
             }
             catch
             {
                 new BadRequestException("Something went wrong Please try again");
             }
+        }
+
+        public bool VerifyOTP(string entity,string OTP)
+        {
+            if (!_memoryCache.TryGetValue($"{entity} OTP", out string cashedCode)) throw new NoDataFoundException("Verification code was not found or has expired");
+            if (OTP != cashedCode) throw new BadRequestException("Please enter valid verificationcode");
+            return true;
         }
     }
 }

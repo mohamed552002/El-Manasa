@@ -11,23 +11,22 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
     public class LoginHandler :  IRequestHandler<LoginRequest, AuthModel>
     {
         private readonly IJwtService _jwtService;
-        private readonly IIdentityService _identityService;
+        private readonly IUserService _userService;
+        private readonly IPasswordService _passwordService;
 
-        public LoginHandler(IJwtService jwtService, IIdentityService identityService)
+        public LoginHandler(IJwtService jwtService, IUserService userService, IPasswordService passwordService)
         {
             _jwtService = jwtService;
-            _identityService = identityService;
+            _userService = userService;
+            _passwordService = passwordService;
         }
 
         public async Task<AuthModel> Handle(LoginRequest request, CancellationToken cancellationToken)
         {
-            var user = await _identityService.GetByEmailAsync(request.LoginDto.Email);
-            if (user == null || !_identityService.VerifyPassword(request.LoginDto.Password, user.PasswordHash) || !user.EmailConfirmed)
+            var user = await _userService.GetByEmailAsync(request.LoginDto.Email);
+            if (user == null || !_passwordService.VerifyPassword(request.LoginDto.Password, user.PasswordHash) || !user.EmailConfirmed)
                 throw new BadRequestException("Wrong email or password");
-            var jwtSecurityToken = (await _jwtService.GenerateToken(user));
-            var userRoles = await _identityService.GetUserRoles(user);
-            var refreshToken =await _jwtService.AssignRefreshTokenToUser(user);
-            return new AuthModel(user, refreshToken, userRoles,jwtSecurityToken);
+            return await _jwtService.GetAuthModel(user);
         }
     }
 }

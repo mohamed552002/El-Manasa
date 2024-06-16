@@ -13,11 +13,13 @@ namespace FutureEducationalPlatform.Persistence.Repositories
     {
         private readonly ApplicationDbContext _context;
         public IUserRepository UserRepository { get; private set; }
+        public IRoleRepository RoleRepository { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             UserRepository=new UserRepository(_context);
+            RoleRepository=new RoleRepository(_context);
         }
 
         public async Task CompleteAsync()

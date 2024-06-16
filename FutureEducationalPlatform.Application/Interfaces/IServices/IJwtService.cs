@@ -1,4 +1,5 @@
-﻿using FutureEducationalPlatform.Domain.Entities.AuthEntites;
+﻿using FutureEducationalPlatform.Application.DTOS.AuthDtos;
+using FutureEducationalPlatform.Domain.Entities.AuthEntites;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace FutureEducationalPlatform.Application.Interfaces.IServices
         Task<JwtSecurityToken> GenerateToken(User user);
         Task<RefreshToken> AssignRefreshTokenToUser(User user);
         RefreshToken GenerateRefreshToken();
+        Task<AuthModel> GetAuthModel(User user);
     }
 }
