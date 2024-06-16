@@ -48,7 +48,6 @@ namespace FutureEducationalPlatform.Controllers
             var result=await _mediator.Send(command);
             return Ok(result);
         }
-        [HttpPatch("")]
 
         private void SetRefreshTokenInCookie(string refreshToken,DateTime expires)
         {
