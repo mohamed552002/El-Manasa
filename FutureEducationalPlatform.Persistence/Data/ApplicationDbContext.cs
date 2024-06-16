@@ -1,5 +1,7 @@
 ﻿
+using FutureEducationalPlatform.Domain.Entities.CourseEntites;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
+using FutureEducationalPlatform.Persistence.EntityConfiguration.CourseEntitesConfiguration;
 using FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntitiesConfiguration;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,6 +24,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new StudentConfiguration());
         modelBuilder.ApplyConfiguration(new SuperAdminConfiguration());
         modelBuilder.ApplyConfiguration(new ParentConfiguration());
+        modelBuilder.ApplyConfiguration(new CourseConfiguration());
     }
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
@@ -30,6 +33,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Student> Students { get; set; }
     public DbSet<SuperAdmin> SuperAdmins { get; set; }
     public DbSet<Parent> Parents { get; set; }
+    public DbSet<Course> Courses { get; set; }
 
 }
 
