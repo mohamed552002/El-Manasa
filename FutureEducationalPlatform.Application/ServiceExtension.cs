@@ -31,7 +31,8 @@ namespace FutureEducationalPlatform.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddScoped(typeof(IBaseService<,,,>), typeof(BaseService<,,,>));
-            services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IEmailSender, EmailSender>();
             services.AddScoped<IOTPServices, OTPServices>();
             services.AddScoped<IPasswordService, PasswordService>();

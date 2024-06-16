@@ -17,20 +17,20 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
 {
     public class VerifyAccountHandler : IRequestHandler<VerifyAccountRequest, AuthModel>
     {
-        private readonly IIdentityService _identityService;
+        private readonly IUserService _userService;
         private readonly IJwtService _jwtService;
         private readonly IOTPServices _otpServices;
 
-        public VerifyAccountHandler(IIdentityService identityService, IJwtService jwtService, IOTPServices otpServices)
+        public VerifyAccountHandler(IUserService userService, IJwtService jwtService, IOTPServices otpServices)
         {
-            _identityService = identityService;
+            _userService = userService;
             _jwtService = jwtService;
             _otpServices = otpServices;
         }
 
         public async Task<AuthModel> Handle(VerifyAccountRequest request, CancellationToken cancellationToken)
         {
-            var user=await _identityService.GetByEmailAsync(request.VerifyAccountDto.Email);
+            var user=await _userService.GetByEmailAsync(request.VerifyAccountDto.Email);
             if (user == null) throw new EntityNotFoundException("Wrong email");
             _otpServices.VerifyOTP(user.Id.ToString(),request.VerifyAccountDto.VerificationCode);
             user.EmailConfirmed = true;

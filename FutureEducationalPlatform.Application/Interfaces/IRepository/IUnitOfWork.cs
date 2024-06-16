@@ -14,6 +14,7 @@ namespace FutureEducationalPlatform.Application.Interfaces.IRepository
         IBaseRepository<T> GetRepository<T>() where T : BaseModel;
         Task CompleteAsync();
         IUserRepository UserRepository { get; }
+        IRoleRepository RoleRepository { get; }
 
     } 
 }
