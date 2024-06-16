@@ -8,21 +8,22 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
 {
     public class ChangePasswordHandler : IRequestHandler<ChangePasswordRequest, string>
     {
-        private readonly IIdentityService _identityService;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IPasswordService _passwordService;
+        private readonly IUserService _userService;
 
-        public ChangePasswordHandler(IIdentityService identityService, IUnitOfWork unitOfWork)
+        public ChangePasswordHandler(IPasswordService passwordService, IUserService userService)
         {
-            _identityService = identityService;
-            _unitOfWork = unitOfWork;
+            _passwordService = passwordService;
+            _userService = userService;
         }
 
         public async Task<string> Handle(ChangePasswordRequest request, CancellationToken cancellationToken)
         {
-            var user =  await _unitOfWork.UserRepository.GetUserByRefreshTokenAsync(request.ChangePasswordDto.refreshToken);
+            var user =  await _userService.GetUserByRefreshTokenAsync(request.ChangePasswordDto.refreshToken);
             if (user == null || request.ChangePasswordDto.refreshToken == "")
                 throw new EntityNotFoundException("User Not Found");
-            await _identityService.ChangePassword(user,request.ChangePasswordDto.oldPassword, request.ChangePasswordDto.newPassword);
+            _passwordService.ChangePassword(user,request.ChangePasswordDto.oldPassword, request.ChangePasswordDto.newPassword);
+            await _userService.Update(user);
             return request.ChangePasswordDto.newPassword;
         }
     }
