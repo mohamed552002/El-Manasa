@@ -5,12 +5,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FutureEducationalPlatform.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class CenterController : BaseController
     {
         public CenterController(IMediator mediator) : base(mediator) { }
 
+        [HttpGet("GetCenters")]
+        public async Task<IActionResult> GetCentersAsync() =>
+           Ok(await _mediator.Send(new GetCentersRequest()));
+
+        [HttpGet("GetCenterById")]
+        public async Task<IActionResult> GetCenterByIdAsync(Guid id) =>
+           Ok(await _mediator.Send(new GetCenterByIdRequest(id)));
+
+        [HttpPost("CreateCenter")]
+        public async Task<IActionResult> CreateCenterAsync(CreateCenterDto createCenterDto) =>
+            Ok(await _mediator.Send(new CreateCenterRequest(createCenterDto)));
 
         [HttpPut("UpdateCenter")]
         public async Task<IActionResult> UpdateCenterAsync(Guid id, UpdateCenterDto updateCenterDto)=>

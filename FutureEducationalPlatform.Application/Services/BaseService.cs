@@ -43,7 +43,7 @@ namespace FutureEducationalPlatform.Application.Services
         public async Task<TEntity> GetByPropertyAsyncWithoutMap(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null)
         {
             var entity = await _baseRepository.FirstOrDefaultAsync(predicate, includes);
-            CheckAndThorwException(entity);
+            if (entity == null) throw new EntityNotFoundException("No data is found");
             return entity;
         }
         #endregion
@@ -86,12 +86,8 @@ namespace FutureEducationalPlatform.Application.Services
         protected async Task<TEntity> GetEntityAsync(Guid id)
         {
             var entity = await _baseRepository.GetByIdAsync(id);
-            CheckAndThorwException(entity);
-            return entity;
-        }
-        private void CheckAndThorwException(TEntity entity)
-        {
             if (entity == null) throw new EntityNotFoundException("No data is found");
+            return entity;
         }
         #endregion
     }
