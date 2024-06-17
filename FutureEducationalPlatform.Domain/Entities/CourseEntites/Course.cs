@@ -1,4 +1,5 @@
 ﻿using FutureEducationalPlatform.Domain.Common;
+using FutureEducationalPlatform.Domain.Entities.CenterEntites;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using FutureEducationalPlatform.Domain.Enums;
 
@@ -13,5 +14,6 @@ namespace FutureEducationalPlatform.Domain.Entities.CourseEntites
         public bool IsActive { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public virtual ICollection<CenterCourseTime> Centers { get; set; }
     }
 }
