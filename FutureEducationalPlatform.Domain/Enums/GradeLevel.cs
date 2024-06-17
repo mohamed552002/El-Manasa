@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Domain.Enums
 {
+    public enum GenderEnum
+    {
+        Male,
+        Female
+    }
     public enum GradeLevel
     {
         FirstSecondaryGrade = 1,

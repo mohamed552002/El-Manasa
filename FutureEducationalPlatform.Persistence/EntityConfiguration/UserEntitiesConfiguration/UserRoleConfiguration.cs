@@ -14,6 +14,7 @@ namespace FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntities
         public void Configure(EntityTypeBuilder<UserRoles> builder)
         {
             builder.HasKey(x => new {x.RoleId , x.UserId});
+            builder.HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }

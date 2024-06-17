@@ -21,7 +21,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
 
         public async Task Handle(ForgetPasswordRequest request, CancellationToken cancellationToken)
         {
-            if (!await _unitOfWork.GetRepository<User>().IsExist(u => u.Email == request.email))
+            if (!await _unitOfWork.UserRepository.IsExist(u => u.Email == request.email))
                 throw new EntityNotFoundException("Wrong Email");
             _otpServices.SendOTP(request.email,request.email);
         }

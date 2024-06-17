@@ -32,6 +32,7 @@ namespace FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntities
             builder.Property(u => u.SecurityStamp)
                 .HasMaxLength(64);
             builder.OwnsMany(u => u.RefreshTokens);
+            builder.HasQueryFilter(u => !u.IsDeleted);
         }
     }
 }

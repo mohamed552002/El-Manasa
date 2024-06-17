@@ -64,7 +64,7 @@ namespace FutureEducationalPlatform.Application.Services
             return result;
         }
 
-        public async void Delete(Guid id)
+        public async Task Delete(Guid id)
         {
            var entity =  await GetEntityAsync(id);
             _baseRepository.Delete(entity);
@@ -92,7 +92,6 @@ namespace FutureEducationalPlatform.Application.Services
         private void CheckAndThorwException(TEntity entity)
         {
             if (entity == null) throw new EntityNotFoundException("No data is found");
-            if (entity.IsDeleted == true) throw new NoDataFoundException("Something went wrong");
         }
         #endregion
     }

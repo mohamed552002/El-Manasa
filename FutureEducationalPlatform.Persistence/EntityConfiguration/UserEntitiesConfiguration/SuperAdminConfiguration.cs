@@ -17,6 +17,7 @@ namespace FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntities
             builder.HasOne(x => x.User)
                 .WithOne()
                 .HasForeignKey<SuperAdmin>(x => x.Id);
+            builder.HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }

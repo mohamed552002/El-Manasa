@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Interfaces.IRepository
 {
-    public interface IUserRepository
+    public interface IUserRepository:IBaseRepository<User>
     {
         Task<User> GetUserByRefreshTokenAsync(string refreshToken);
     }

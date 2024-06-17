@@ -55,7 +55,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Admin", b =>
@@ -78,7 +78,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Admins");
+                    b.ToTable("Admins", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Parent", b =>
@@ -96,7 +96,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Parents");
+                    b.ToTable("Parents", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Role", b =>
@@ -116,7 +116,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Student", b =>
@@ -147,7 +147,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.SuperAdmin", b =>
@@ -164,7 +164,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SuperAdmins");
+                    b.ToTable("SuperAdmins", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.User", b =>
@@ -235,7 +235,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.UserRoles", b =>
@@ -253,7 +253,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Admin", b =>
@@ -310,7 +310,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.User", b =>
                 {
-                    b.OwnsMany("FutureEducationalPlatform.Domain.Entities.AuthEntites.RefreshToken", "RefreshTokens", b1 =>
+                    b.OwnsMany("FutureEducationalPlatform.Domain.Entities.UserEntities.User.RefreshTokens#FutureEducationalPlatform.Domain.Entities.AuthEntites.RefreshToken", "RefreshTokens", b1 =>
                         {
                             b1.Property<Guid>("UserId")
                                 .HasColumnType("uniqueidentifier");
@@ -336,7 +336,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                             b1.HasKey("UserId", "Id");
 
-                            b1.ToTable("RefreshToken");
+                            b1.ToTable("RefreshToken", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");

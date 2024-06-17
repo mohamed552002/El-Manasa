@@ -18,6 +18,7 @@ namespace FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntities
                 .HasDefaultValueSql("NEWID()")
                     .ValueGeneratedOnAdd();
             builder.Property(x => x.Name).HasMaxLength(50);
+            builder.HasQueryFilter(r => !r.IsDeleted);
         }
     }
 }

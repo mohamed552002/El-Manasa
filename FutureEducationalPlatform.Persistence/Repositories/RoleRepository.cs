@@ -9,15 +9,9 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Persistence.Repositories
 {
-    public class RoleRepository: IRoleRepository
+    public class RoleRepository: BaseRepository<UserRoles> ,IRoleRepository
     {
-        private readonly ApplicationDbContext _context;
-
-        public RoleRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
+        public RoleRepository(ApplicationDbContext context) : base(context) { }
         public async Task<IEnumerable<string>> GetUserRoles(User user) => await _context.UserRoles.Include(ur => ur.Roles).Where(ur => ur.UserId == user.Id).Select(ur => ur.Roles.Name).ToListAsync();
         public async Task AddToRoleAsync(User user, string roleName)
         {

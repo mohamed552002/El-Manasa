@@ -19,6 +19,7 @@ namespace FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntities
                  .HasForeignKey<Parent>(p => p.Id);
             builder.Property(p => p.PhoneNumber)
                 .HasMaxLength(11);
+            builder.HasQueryFilter(p => !p.IsDeleted);
         }
     }
 }

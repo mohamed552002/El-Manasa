@@ -1,5 +1,6 @@
 ﻿using FutureEducationalPlatform.Domain.Common;
 using FutureEducationalPlatform.Domain.Entities.AuthEntites;
+using FutureEducationalPlatform.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -29,10 +30,5 @@ namespace FutureEducationalPlatform.Domain.Entities.UserEntities
         // Navigation Properties
         public virtual IEnumerable<UserRoles> Roles { get; set; }
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
-    }
-    public enum GenderEnum
-    {
-        Male,
-        Female
     }
 }

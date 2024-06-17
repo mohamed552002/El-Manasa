@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Interfaces.IRepository
 {
-    public interface IRoleRepository
+    public interface IRoleRepository:IBaseRepository<UserRoles>
     {
         Task<IEnumerable<string>> GetUserRoles(User user);
         Task AddToRoleAsync(User user, string roleName);

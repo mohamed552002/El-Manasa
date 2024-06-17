@@ -9,15 +9,9 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Persistence.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository<User>,IUserRepository
     {
-        private readonly ApplicationDbContext _context;
-
-        public UserRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
+        public UserRepository(ApplicationDbContext context) : base(context) { }
         public async Task<User> GetUserByRefreshTokenAsync(string refreshToken)
         {
             var user =await _context.Users.Include(u => u.RefreshTokens).FirstOrDefaultAsync(u => u.RefreshTokens.Any(r => r.Token == refreshToken));
