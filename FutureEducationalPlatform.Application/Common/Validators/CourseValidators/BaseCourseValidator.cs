@@ -1,7 +1,5 @@
 ﻿using FluentValidation;
 using FutureEducationalPlatform.Application.DTOS.CourseDtos;
-using MediatR;
-using System.Linq.Expressions;
 
 namespace FutureEducationalPlatform.Application.Common.Validators.CourseValidators
 {
