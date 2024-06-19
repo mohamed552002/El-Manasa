@@ -19,9 +19,9 @@ namespace FutureEducationalPlatform.Controllers
         public async Task<IActionResult> UpdateCenterCourseTimeAsync(Guid id, UpdateCenterCourseTimeDto updateCenterCourseTime) =>
              Ok(await _mediator.Send(new UpdateCenterCourseTimeRequest(id, updateCenterCourseTime)));
         [HttpDelete]
-        public async Task<IActionResult> DeleteCenterCourseTime(Guid id)
+        public async Task<IActionResult> DeleteCenterCourseTime(Guid courseId, Guid centerId)
         {
-            var result = await _mediator.Send(new DeleteCenterCourseTimeRequest(id));
+            var result = await _mediator.Send(new DeleteCenterCourseTimeRequest(courseId, centerId));
             return Ok(result);
         }
     }

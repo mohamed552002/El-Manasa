@@ -70,7 +70,13 @@ namespace FutureEducationalPlatform.Application.Services
             _baseRepository.Delete(entity);
             await _unitOfWork.CompleteAsync();
         }
-        
+        public async Task Delete(Expression<Func<TEntity,bool>> predicate)
+        {
+            var entity = await GetByPropertyAsyncWithoutMap(predicate);
+            _baseRepository.Delete(entity);
+            await _unitOfWork.CompleteAsync();
+        }
+
 
         public async Task<TEntity> Update(Guid id,TUpdateDto updateDto)
         {
