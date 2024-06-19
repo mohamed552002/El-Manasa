@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.DTOS.CenterCourseTimeDtos
 {
-    public record UpdateCenterCourceDto
-    (
-        Guid CenterId,
-        Guid CourseId,
-        DayOfWeek LectureDay,
-        TimeSpan LectureTime
-    );
-
+    public record GetCenterCourseTimeDto
+        (
+            DayOfWeek LectureDay,
+            TimeSpan LectureTime
+        );
 }
