@@ -1,7 +1,6 @@
 ﻿using FutureEducationalPlatform.Application.DTOS.CenterCourseTimeDtos;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Entities.CenterEntites;
-using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
