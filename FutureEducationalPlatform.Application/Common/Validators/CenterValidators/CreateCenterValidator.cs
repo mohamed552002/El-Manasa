@@ -11,16 +11,7 @@ namespace FutureEducationalPlatform.Application.Common.Validators.CenterValidato
     {
         public CreateCenterValidator()
         {
-            RuleFor(c => c.CreateCenterDto.Name)
-                .NotEmpty()
-                .NotNull()
-                .Length(2, 60)
-                .WithMessage("يجب ان يكون اسم السنتر بين 2 الي 60 حرف");
-            RuleFor(c => c.CreateCenterDto.Address)
-                .NotEmpty()
-                .NotNull()
-                .Length(5, 120)
-                .WithMessage("يجب ان يكون عنوان السنتر بين 5 الي 120 حرف");
+            RuleFor(r => r.CreateCenterDto).SetValidator(new BaseValidator());
         }
     }
 }
