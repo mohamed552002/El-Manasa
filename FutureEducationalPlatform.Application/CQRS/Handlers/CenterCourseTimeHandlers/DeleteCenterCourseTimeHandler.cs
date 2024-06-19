@@ -19,7 +19,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.CenterCourseTimeHa
 
         public async Task<string> Handle(DeleteCenterCourseTimeRequest request, CancellationToken cancellationToken)
         {
-            await _baseService.Delete(request.id);
+            await _baseService.Delete(x => x.CenterId == request.centerId && x.CourseId == request.courseId);
             return "تم حذف الميعاد بنجاح";
         }
     }
