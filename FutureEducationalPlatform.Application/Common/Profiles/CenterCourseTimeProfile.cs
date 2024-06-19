@@ -14,8 +14,8 @@ namespace FutureEducationalPlatform.Application.Common.Profiles
         public CenterCourseTimeProfile()
         {
             CreateMap<AddCenterCourseTimeDto, CenterCourseTime>();
-            CreateMap<UpdateCenterCourceDto, CenterCourseTime>();
-            CreateMap<CenterCourseTime, GentCenterCourseTimeDto>();
+            CreateMap<UpdateCenterCourseTimeDto, CenterCourseTime>();
+            CreateMap<CenterCourseTime, GetCenterCourseTimeDto>();
         }
     }
 }
