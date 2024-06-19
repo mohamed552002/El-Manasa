@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.DTOS.CenterCourseTimeDtos
 {
-    public record UpdateCenterCourseTimeDto
-    (
-        Guid CenterId,
-        Guid CourseId,
-        DayOfWeek LectureDay,
-        TimeSpan LectureTime
-    );
-
+    public record UpdateCenterCourseTimeDto : BaseCenterCourseTimeDto
+    {
+        public UpdateCenterCourseTimeDto(Guid CenterId, Guid CourseId, DayOfWeek LectureDay, TimeSpan LectureTime) : base(CenterId, CourseId, LectureDay, LectureTime)
+        {
+        }
+    }
 }

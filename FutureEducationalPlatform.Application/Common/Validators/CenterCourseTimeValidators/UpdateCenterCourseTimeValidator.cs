@@ -11,10 +11,7 @@ namespace FutureEducationalPlatform.Application.Common.Validators.CenterCourseTi
     {
         public UpdateCenterCourseTimeValidator()
         {
-            RuleFor(r=>r.UpdateCenterCourseTimeDto.CenterId).NotEmpty().NotNull().WithMessage("يرجي ادخال رقم السنتر");
-            RuleFor(r=>r.UpdateCenterCourseTimeDto.CourseId).NotEmpty().NotNull().WithMessage("يرجي ادخال رقم الكورس");
-            RuleFor(r => r.UpdateCenterCourseTimeDto.LectureDay).NotEmpty().NotNull().IsInEnum().WithMessage("لا يوجد يوم بهذه القيمه");
-            RuleFor(r => r.UpdateCenterCourseTimeDto.LectureTime).NotEmpty().NotNull().WithMessage("يرجي ادخال ميعاد المحاضره");
+            RuleFor(c => c.UpdateCenterCourseTimeDto).SetValidator(new BaseCenterCourseTimeValidator());
         }
     }
 }
