@@ -1,7 +1,6 @@
 ﻿using FutureEducationalPlatform.Application.CQRS.Commands.CenterCourseTimeCommands;
 using FutureEducationalPlatform.Application.DTOS.CenterCourseTimeDtos;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FutureEducationalPlatform.Controllers
@@ -19,9 +18,9 @@ namespace FutureEducationalPlatform.Controllers
         public async Task<IActionResult> UpdateCenterCourseTimeAsync(Guid id, UpdateCenterCourseTimeDto updateCenterCourseTime) =>
              Ok(await _mediator.Send(new UpdateCenterCourseTimeRequest(id, updateCenterCourseTime)));
         [HttpDelete]
-        public async Task<IActionResult> DeleteCenterCourseTime(Guid courseId, Guid centerId)
+        public async Task<IActionResult> DeleteCenterCourseTime(Guid id)
         {
-            var result = await _mediator.Send(new DeleteCenterCourseTimeRequest(courseId, centerId));
+            var result = await _mediator.Send(new DeleteCenterCourseTimeRequest(id));
             return Ok(result);
         }
     }

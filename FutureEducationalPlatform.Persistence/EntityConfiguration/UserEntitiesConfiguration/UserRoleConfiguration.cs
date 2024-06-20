@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntitiesConfiguration
 {
-    public class UserRoleConfiguration : IEntityTypeConfiguration<UserRoles>
+    public class UserRoleConfiguration : BaseConfiguration<UserRoles>
     {
-        public void Configure(EntityTypeBuilder<UserRoles> builder)
+        public override void Configure(EntityTypeBuilder<UserRoles> builder)
         {
-            builder.HasKey(x => new {x.RoleId , x.UserId});
-            builder.HasQueryFilter(x => !x.IsDeleted);
+            base.Configure(builder);
+            builder
+           .HasIndex(x => new { x.RoleId, x.UserId })
+           .IsUnique()
+           .HasFilter("[IsDeleted] = 0");
         }
     }
 }
