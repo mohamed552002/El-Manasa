@@ -10,7 +10,6 @@ namespace FutureEducationalPlatform.Domain.Entities.UserEntities
 {
     public class Student : BaseModel
     {
-        public Guid Id { get; set; }
         public int GradeLevel { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }

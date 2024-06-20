@@ -9,14 +9,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntitiesConfiguration
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class UserConfiguration : BaseConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public override void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(e => e.Id)
-              .HasDefaultValueSql("NEWID()")
-              .ValueGeneratedOnAdd();
+            base.Configure(builder);
             builder.Property(u => u.FirstName)
                  .HasMaxLength(50);
             builder.Property(u => u.LastName)
@@ -32,7 +29,6 @@ namespace FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntities
             builder.Property(u => u.SecurityStamp)
                 .HasMaxLength(64);
             builder.OwnsMany(u => u.RefreshTokens);
-            builder.HasQueryFilter(u => !u.IsDeleted);
         }
     }
 }

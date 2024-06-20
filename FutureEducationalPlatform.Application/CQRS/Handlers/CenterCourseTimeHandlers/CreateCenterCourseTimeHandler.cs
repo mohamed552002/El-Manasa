@@ -10,8 +10,10 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.CenterCourseTimeHa
 {
     public class CreateCenterCourseTimeHandler : BaseCenterCourseTimeHandler, IRequestHandler<CreateCenterCourseTimeRequest, string>
     {
-        public CreateCenterCourseTimeHandler(IBaseService<CenterCourseTime, GetCenterCourseTimeDto, AddCenterCourseTimeDto, UpdateCenterCourseTimeDto> baseService,IUnitOfWork unitOfWork) : base(baseService, unitOfWork)
+        private readonly IUnitOfWork _unitOfWork;
+        public CreateCenterCourseTimeHandler(IBaseService<CenterCourseTime, GetCenterCourseTimeDto, AddCenterCourseTimeDto, UpdateCenterCourseTimeDto> baseService,IUnitOfWork unitOfWork) : base(baseService)
         {
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<string> Handle(CreateCenterCourseTimeRequest request, CancellationToken cancellationToken)

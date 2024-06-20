@@ -9,15 +9,13 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Persistence.EntityConfiguration.CenterEntitesConfiguration
 {
-    public class CenterConfiguration : IEntityTypeConfiguration<Center>
+    public class CenterConfiguration : BaseConfiguration<Center>
     {
-        public void Configure(EntityTypeBuilder<Center> builder)
+        public override void Configure(EntityTypeBuilder<Center> builder)
         {
-            builder.HasKey(c=>c.Id);
-            builder.Property(c => c.Id).HasDefaultValueSql("NEWID()").ValueGeneratedOnAdd();
+            base.Configure(builder);
             builder.Property(c => c.Name).HasMaxLength(64);
             builder.Property(c => c.Address).HasMaxLength(128);
-            builder.HasQueryFilter(c => !c.IsDeleted);
         }
     }
 }
