@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Domain.Entities.AuthEntites
 {
-    public class RefreshToken : BaseModel
+    public class RefreshToken
     {
+        public bool IsDeleted { get; set; }
         public string Token { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
         public DateTime ExpiredOn { get; set; } = DateTime.UtcNow.AddDays(15);

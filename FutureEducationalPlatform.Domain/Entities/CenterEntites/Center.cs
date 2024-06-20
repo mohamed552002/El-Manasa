@@ -9,7 +9,6 @@ namespace FutureEducationalPlatform.Domain.Entities.CenterEntites
 {
     public class Center:BaseModel
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public virtual ICollection<CenterCourseTime> Courses { get; set; }

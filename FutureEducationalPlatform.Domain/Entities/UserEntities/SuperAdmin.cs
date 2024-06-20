@@ -9,7 +9,6 @@ namespace FutureEducationalPlatform.Domain.Entities.UserEntities
 {
     public class SuperAdmin:BaseModel
     {
-        public Guid Id { get; set; }
         public string ImgUrl { get; set; } 
         public User User { get; set; }
     }

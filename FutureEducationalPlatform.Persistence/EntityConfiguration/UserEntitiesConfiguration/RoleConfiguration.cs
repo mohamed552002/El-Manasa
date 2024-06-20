@@ -9,16 +9,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntitiesConfiguration
 {
-    public class RoleConfiguration : IEntityTypeConfiguration<Role>
+    public class RoleConfiguration : BaseConfiguration<Role>
     {
-        public void Configure(EntityTypeBuilder<Role> builder)
+        public override void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id)
-                .HasDefaultValueSql("NEWID()")
-                    .ValueGeneratedOnAdd();
+            base.Configure(builder);
             builder.Property(x => x.Name).HasMaxLength(50);
-            builder.HasQueryFilter(r => !r.IsDeleted);
         }
     }
 }
