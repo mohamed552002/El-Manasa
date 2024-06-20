@@ -1,4 +1,5 @@
-﻿using FutureEducationalPlatform.Application.Interfaces.IRepository;
+﻿using FutureEducationalPlatform.Application.Common.Exceptions;
+using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,7 +17,11 @@ namespace FutureEducationalPlatform.Persistence.Repositories
         public async Task AddToRoleAsync(User user, string roleName)
         {
             var role = await _context.Roles.FirstOrDefaultAsync(r => r.Name.ToLower().Trim() == roleName.ToLower().Trim());
-            await _context.UserRoles.AddAsync(new UserRoles { UserId = user.Id, RoleId = role.Id });
+            if(role != null && !await _context.Users.AnyAsync(u => u.Id == user.Id))
+                throw new EntityNotFoundException("الدور او المستخدم غير موجودين");
+            if (!await IsExist(ur => ur.UserId == user.Id) && !await IsExist(ur => ur.RoleId == role.Id))
+                throw new BadRequestException("هذا المستخدم مضاف يقوم بهذا الدور بالفعل");
+                await _context.UserRoles.AddAsync(new UserRoles { UserId = user.Id, RoleId = role.Id });
         }
     }
 }
