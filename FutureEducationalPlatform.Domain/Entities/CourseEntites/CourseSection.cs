@@ -14,5 +14,7 @@ namespace FutureEducationalPlatform.Domain.Entities.CourseEntites
         public bool IsActive { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public Guid CourseId { get; set; }
+        public virtual Course Course { get; set; }
     }
 }

@@ -14,5 +14,6 @@ namespace FutureEducationalPlatform.Domain.Entities.CourseEntites
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public virtual ICollection<CenterCourseTime> Centers { get; set; }
+        public virtual ICollection<CourseSection> Sections { get; set; }
     }
 }

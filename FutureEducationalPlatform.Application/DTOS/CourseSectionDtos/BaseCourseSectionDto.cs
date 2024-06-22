@@ -11,6 +11,7 @@ namespace FutureEducationalPlatform.Application.DTOS.CourseSectionDtos
         string Description,
         DateTime StartDate,
         DateTime EndDate,
+        Guid CourseId,
         bool IsActive
         );
 }

@@ -9,7 +9,7 @@ namespace FutureEducationalPlatform.Application.DTOS.CourseSectionDtos
     public record GetCourseSectionDto : BaseCourseSectionDto
     {
         public Guid Id { get; set; }
-        public GetCourseSectionDto(string Name, string Description, DateTime StartDate, DateTime EndDate, bool IsActive) : base(Name, Description, StartDate, EndDate, IsActive)
+        public GetCourseSectionDto(string Name, string Description, DateTime StartDate, DateTime EndDate, Guid CourseId, bool IsActive) : base(Name, Description, StartDate, EndDate,CourseId, IsActive)
         {
         }
     }

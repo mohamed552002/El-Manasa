@@ -3,11 +3,7 @@ using FutureEducationalPlatform.Application.DTOS.CourseDtos;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Entities.CourseEntites;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace FutureEducationalPlatform.Application.CQRS.Handlers.CourseHandlers
 {
@@ -17,7 +13,12 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.CourseHandlers
 
         public async Task<string> Handle(DeleteCourseRequest request, CancellationToken cancellationToken)
         {
-            await _baseService.Delete(request.Id);
+            var course = await _baseService.GetByPropertyAsyncWithoutMap(c => c.Id == request.Id, c => c.Include(c => c.Centers).Include(c=>c.Sections));
+            foreach (var center in course.Centers) 
+                center.IsDeleted = true;
+            foreach(var section in course.Sections) 
+                section.IsDeleted = true;
+            await _baseService.Delete(course);
             return "تم حذف الدورة بنجاح";
         }
     }

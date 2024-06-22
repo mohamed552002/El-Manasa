@@ -8,7 +8,7 @@ namespace FutureEducationalPlatform.Application.DTOS.CourseSectionDtos
 {
     public record UpdateCourseSectionDto : BaseCourseSectionDto
     {
-        public UpdateCourseSectionDto(string Name, string Description, DateTime StartDate, DateTime EndDate, bool IsActive) : base(Name, Description, StartDate, EndDate, IsActive)
+        public UpdateCourseSectionDto(string Name, string Description, DateTime StartDate, DateTime EndDate, Guid CourseId, bool IsActive) : base(Name, Description, StartDate, EndDate, CourseId, IsActive)
         {
         }
     }

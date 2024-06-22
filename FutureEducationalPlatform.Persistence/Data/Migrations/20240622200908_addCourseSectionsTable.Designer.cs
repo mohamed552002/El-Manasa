@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FutureEducationalPlatform.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240622153843_addCourseSectionTable")]
-    partial class addCourseSectionTable
+    [Migration("20240622200908_addCourseSectionsTable")]
+    partial class addCourseSectionsTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,6 +126,9 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(512)
@@ -149,6 +152,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("CourseSections");
                 });
@@ -379,6 +384,17 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.Navigation("Course");
                 });
 
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CourseEntites.CourseSection", b =>
+                {
+                    b.HasOne("FutureEducationalPlatform.Domain.Entities.CourseEntites.Course", "Course")
+                        .WithMany("Sections")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Admin", b =>
                 {
                     b.HasOne("FutureEducationalPlatform.Domain.Entities.UserEntities.User", "User")
@@ -495,6 +511,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CourseEntites.Course", b =>
                 {
                     b.Navigation("Centers");
+
+                    b.Navigation("Sections");
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Parent", b =>

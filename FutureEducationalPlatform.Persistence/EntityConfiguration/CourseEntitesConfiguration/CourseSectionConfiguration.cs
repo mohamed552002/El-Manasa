@@ -13,8 +13,11 @@ namespace FutureEducationalPlatform.Persistence.EntityConfiguration.CourseEntite
         public override void Configure(EntityTypeBuilder<CourseSection> builder)
         {
             base.Configure(builder);
-            builder.Property(c => c.Name).HasMaxLength(64);
-            builder.Property(c => c.Description).HasMaxLength(512);
+            builder.Property(cs => cs.Name).HasMaxLength(64);
+            builder.Property(cs => cs.Description).HasMaxLength(512);
+               builder.HasOne(cs => cs.Course)
+                 .WithMany(c=>c.Sections)
+                 .HasForeignKey(cs => cs.CourseId);
         }
     }
 }

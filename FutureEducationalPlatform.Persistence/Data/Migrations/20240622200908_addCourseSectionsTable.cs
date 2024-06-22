@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FutureEducationalPlatform.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class addCourseSectionTable : Migration
+    public partial class addCourseSectionsTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,12 +21,24 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CourseSections", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CourseSections_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CourseSections_CourseId",
+                table: "CourseSections",
+                column: "CourseId");
         }
 
         /// <inheritdoc />
