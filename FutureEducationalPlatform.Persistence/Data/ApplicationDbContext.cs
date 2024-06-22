@@ -1,9 +1,11 @@
 ﻿
 using FutureEducationalPlatform.Domain.Entities.CenterEntites;
 using FutureEducationalPlatform.Domain.Entities.CourseEntites;
+using FutureEducationalPlatform.Domain.Entities.QuestionEntites;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using FutureEducationalPlatform.Persistence.EntityConfiguration.CenterEntitesConfiguration;
 using FutureEducationalPlatform.Persistence.EntityConfiguration.CourseEntitesConfiguration;
+using FutureEducationalPlatform.Persistence.EntityConfiguration.QuestionEntitesConfiguration;
 using FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntitiesConfiguration;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,6 +31,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new CourseConfiguration());
         modelBuilder.ApplyConfiguration(new CenterConfiguration());
         modelBuilder.ApplyConfiguration(new CenterCourseTimeConfiguration());
+        modelBuilder.ApplyConfiguration(new QuestionEntityConfiguration());
     }
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
@@ -40,6 +43,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Course> Courses { get; set; }
     public DbSet<Center> Centers { get; set; }
     public DbSet<CenterCourseTime> CentersCourseTime { get; set; }
+    public DbSet<Question> Questions { get; set; }
 
 }
 
