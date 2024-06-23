@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FutureEducationalPlatform.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240622154212_AddQuestionTable")]
+    partial class AddQuestionTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,17 +119,12 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.ToTable("Courses");
                 });
 
-
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.QuestionEntites.Question", b =>
-
-            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CourseEntites.CourseSection", b =>
-
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
-
 
                     b.Property<int>("Answers")
                         .HasColumnType("int");
@@ -140,24 +138,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.Property<double>("Grade")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -168,21 +150,11 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
-
-                    b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("Questions");
-                    b.HasIndex("CourseId");
-
-                    b.ToTable("CourseSections");
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Admin", b =>
@@ -411,17 +383,6 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CourseEntites.CourseSection", b =>
-                {
-                    b.HasOne("FutureEducationalPlatform.Domain.Entities.CourseEntites.Course", "Course")
-                        .WithMany("Sections")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-                });
-
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Admin", b =>
                 {
                     b.HasOne("FutureEducationalPlatform.Domain.Entities.UserEntities.User", "User")
@@ -538,8 +499,6 @@ namespace FutureEducationalPlatform.Persistence.Migrations
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CourseEntites.Course", b =>
                 {
                     b.Navigation("Centers");
-
-                    b.Navigation("Sections");
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Parent", b =>
