@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FutureEducationalPlatform.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240622200908_addCourseSectionsTable")]
+    partial class addCourseSectionsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,29 +119,12 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.ToTable("Courses");
                 });
 
-
-            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.QuestionEntites.Question", b =>
-
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CourseEntites.CourseSection", b =>
-
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
-
-
-                    b.Property<int>("Answers")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Difficulity")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Grade")
-                        .HasColumnType("float");
 
                     b.Property<Guid>("CourseId")
                         .HasColumnType("uniqueidentifier");
@@ -154,20 +140,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -179,7 +153,6 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Questions");
                     b.HasIndex("CourseId");
 
                     b.ToTable("CourseSections");
