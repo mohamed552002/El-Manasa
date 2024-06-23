@@ -13,12 +13,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.CourseHandlers
 
         public async Task<string> Handle(DeleteCourseRequest request, CancellationToken cancellationToken)
         {
-            var course = await _baseService.GetByPropertyAsyncWithoutMap(c => c.Id == request.Id, c => c.Include(c => c.Centers).Include(c=>c.Sections));
-            foreach (var center in course.Centers) 
-                center.IsDeleted = true;
-            foreach(var section in course.Sections) 
-                section.IsDeleted = true;
-            await _baseService.Delete(course);
+            await _baseService.Delete(request.Id);
             return "تم حذف الدورة بنجاح";
         }
     }
