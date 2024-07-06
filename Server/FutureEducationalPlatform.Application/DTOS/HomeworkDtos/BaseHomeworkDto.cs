@@ -8,7 +8,7 @@ namespace FutureEducationalPlatform.Application.DTOS.HomeworkDtos
 {
     public record BaseHomeworkDto
     {
-        public string Name;
-        public bool IsActive = true;
+        public string Name { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }
