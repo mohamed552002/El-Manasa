@@ -14,7 +14,7 @@ namespace FutureEducationalPlatform.Persistence.EntityConfiguration.HomeworkEnti
         public override void Configure(EntityTypeBuilder<Homework> builder)
         {
             base.Configure(builder);
-            builder.Property(h => h.IsActived).HasDefaultValue(true);
+            builder.Property(h => h.IsActive).HasDefaultValue(true);
             builder.Property(h => h.Name).HasMaxLength(128);
         }
     }
