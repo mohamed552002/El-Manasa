@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FutureEducationalPlatform.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240706192748_EditHomeworkTableAttribute")]
+    partial class EditHomeworkTableAttribute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +45,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("nvarchar(64)");
 
                     b.HasKey("Id");
+
                     b.ToTable("Centers");
                 });
 
@@ -111,6 +115,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
                     b.ToTable("Courses");
                 });
 
@@ -149,46 +154,21 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
+
                     b.ToTable("CourseSections");
                 });
 
-       modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.HomeworkEntites.Homework", b =>
-    {
-        b.Property<Guid>("Id")
-            .ValueGeneratedOnAdd()
-            .HasColumnType("uniqueidentifier")
-            .HasDefaultValueSql("NEWID()");
-
-        b.Property<bool>("IsActived")
-            .ValueGeneratedOnAdd()
-            .HasColumnType("bit")
-            .HasDefaultValue(true);
-
-        b.Property<bool>("IsDeleted")
-            .HasColumnType("bit");
-
-        b.Property<string>("Name")
-            .IsRequired()
-            .HasMaxLength(128)
-            .HasColumnType("nvarchar(128)");
-
-        b.HasKey("Id");
-
-        b.ToTable("Homeworks");
-    });
-
-                   modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.ExamEntities.Exam", b =>
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.HomeworkEntites.Homework", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("time");
-
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -200,7 +180,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exams");
+                    b.ToTable("Homeworks");
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.QuestionEntites.Question", b =>
@@ -237,6 +217,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
                     b.ToTable("Questions");
                 });
 
@@ -259,6 +240,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
                     b.ToTable("Admins");
                 });
 
@@ -276,6 +258,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("nvarchar(11)");
 
                     b.HasKey("Id");
+
                     b.ToTable("Parents");
                 });
 
@@ -295,6 +278,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
                     b.ToTable("Roles");
                 });
 
@@ -325,6 +309,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ParentId");
+
                     b.ToTable("Students");
                 });
 
@@ -341,6 +326,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
                     b.ToTable("SuperAdmins");
                 });
 
@@ -411,6 +397,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                     b.HasIndex("UserName")
                         .IsUnique();
+
                     b.ToTable("Users");
                 });
 
@@ -550,6 +537,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("UserId", "Id");
+
                             b1.ToTable("RefreshToken");
 
                             b1.WithOwner()

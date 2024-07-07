@@ -48,6 +48,5 @@ public class ApplicationDbContext : DbContext
     public DbSet<CourseSection> CourseSections { get; set; }
     public DbSet<Homework> Homeworks { get; set; }
     public DbSet<Exam> Exams { get; set; }
-
 }
 
