@@ -42,7 +42,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("nvarchar(64)");
 
                     b.HasKey("Id");
-                    b.ToTable("Centers");
+
+                    b.ToTable("Centers", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CenterEntites.CenterCourseTime", b =>
@@ -75,7 +76,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .IsUnique()
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.ToTable("CentersCourseTime");
+                    b.ToTable("CentersCourseTime", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CourseEntites.Course", b =>
@@ -111,7 +112,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-                    b.ToTable("Courses");
+
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CourseEntites.CourseSection", b =>
@@ -149,35 +151,11 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
-                    b.ToTable("CourseSections");
+
+                    b.ToTable("CourseSections", (string)null);
                 });
 
-       modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.HomeworkEntites.Homework", b =>
-    {
-        b.Property<Guid>("Id")
-            .ValueGeneratedOnAdd()
-            .HasColumnType("uniqueidentifier")
-            .HasDefaultValueSql("NEWID()");
-
-        b.Property<bool>("IsActived")
-            .ValueGeneratedOnAdd()
-            .HasColumnType("bit")
-            .HasDefaultValue(true);
-
-        b.Property<bool>("IsDeleted")
-            .HasColumnType("bit");
-
-        b.Property<string>("Name")
-            .IsRequired()
-            .HasMaxLength(128)
-            .HasColumnType("nvarchar(128)");
-
-        b.HasKey("Id");
-
-        b.ToTable("Homeworks");
-    });
-
-                   modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.ExamEntities.Exam", b =>
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.ExamEntities.Exam", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -200,7 +178,32 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exams");
+                    b.ToTable("Exams", (string)null);
+                });
+
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.HomeworkEntites.Homework", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<bool>("IsActived")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Homeworks", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.QuestionEntites.Question", b =>
@@ -237,7 +240,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-                    b.ToTable("Questions");
+
+                    b.ToTable("Questions", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Admin", b =>
@@ -259,7 +263,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-                    b.ToTable("Admins");
+
+                    b.ToTable("Admins", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Parent", b =>
@@ -276,7 +281,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("nvarchar(11)");
 
                     b.HasKey("Id");
-                    b.ToTable("Parents");
+
+                    b.ToTable("Parents", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Role", b =>
@@ -295,7 +301,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-                    b.ToTable("Roles");
+
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Student", b =>
@@ -325,7 +332,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ParentId");
-                    b.ToTable("Students");
+
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.SuperAdmin", b =>
@@ -341,7 +349,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-                    b.ToTable("SuperAdmins");
+
+                    b.ToTable("SuperAdmins", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.User", b =>
@@ -411,7 +420,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
                     b.HasIndex("UserName")
                         .IsUnique();
-                    b.ToTable("Users");
+
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.UserRoles", b =>
@@ -438,7 +448,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .IsUnique()
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CenterEntites.CenterCourseTime", b =>
@@ -525,7 +535,7 @@ namespace FutureEducationalPlatform.Persistence.Migrations
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.User", b =>
                 {
-                    b.OwnsMany("FutureEducationalPlatform.Domain.Entities.AuthEntites.RefreshToken", "RefreshTokens", b1 =>
+                    b.OwnsMany("FutureEducationalPlatform.Domain.Entities.UserEntities.User.RefreshTokens#FutureEducationalPlatform.Domain.Entities.AuthEntites.RefreshToken", "RefreshTokens", b1 =>
                         {
                             b1.Property<Guid>("UserId")
                                 .HasColumnType("uniqueidentifier");
@@ -550,7 +560,8 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("UserId", "Id");
-                            b1.ToTable("RefreshToken");
+
+                            b1.ToTable("RefreshToken", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
