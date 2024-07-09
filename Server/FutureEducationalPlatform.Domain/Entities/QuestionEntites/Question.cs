@@ -1,4 +1,6 @@
 ﻿using FutureEducationalPlatform.Domain.Common;
+using FutureEducationalPlatform.Domain.Entities.ExamEntities;
+using FutureEducationalPlatform.Domain.Entities.StudentQuestionAnswerEntites;
 using FutureEducationalPlatform.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace FutureEducationalPlatform.Domain.Entities.QuestionEntites
         public double Grade { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
+        public virtual ICollection<ExamQuestion> Exams { get; set; }
+        public virtual ICollection<StudentQuestionAnswer> StudentsAnswers { get; set; }
     }
 }
