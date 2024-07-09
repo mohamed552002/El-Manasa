@@ -1,5 +1,5 @@
 ﻿
 namespace FutureEducationalPlatform.Application.DTOS.HomeworkQuestionDtos
 {
-    public record UpdateHomeworkQuestionDto(Guid Id):BaseHomeworkQuestionDto;
+    public record UpdateHomeworkQuestionDto():BaseHomeworkQuestionDto;
 }
