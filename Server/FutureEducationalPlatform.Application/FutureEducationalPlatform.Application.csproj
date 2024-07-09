@@ -27,7 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CQRS\Commands\ComprehensiveExamCommands\" />
     <Folder Include="CQRS\Queries\AuthQueries\" />
+    <Folder Include="CQRS\Queries\ComprehensiveExamQueries\" />
   </ItemGroup>
 
 </Project>

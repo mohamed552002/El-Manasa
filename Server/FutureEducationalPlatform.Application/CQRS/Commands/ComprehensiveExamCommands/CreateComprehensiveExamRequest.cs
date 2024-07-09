@@ -1,0 +1,3 @@
+﻿using FutureEducationalPlatform.Application.DTOS.ComprehensiveExamDtos;
+using MediatR;
+public record CreateComprehensiveExamRequest(CreateComprehensiveExamDto CreateComprehensiveExamDto):IRequest<string>;
