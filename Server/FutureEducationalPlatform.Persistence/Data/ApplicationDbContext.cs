@@ -33,6 +33,9 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new CourseSectionConfiguration());
         modelBuilder.ApplyConfiguration(new HomeworkConfiguration());
         modelBuilder.ApplyConfiguration(new ExamConfiguration());
+        modelBuilder.ApplyConfiguration(new HomeworkQuestionConfiguration());
+        modelBuilder.ApplyConfiguration(new ExamQuestionConfiguration());
+
     }
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
@@ -48,5 +51,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<CourseSection> CourseSections { get; set; }
     public DbSet<Homework> Homeworks { get; set; }
     public DbSet<Exam> Exams { get; set; }
+    public DbSet<HomeworkQuestion> HomeworkQuestions { get; set; }
+    public DbSet<ExamQuestion> ExamQuestions { get; set; }
 }
 
