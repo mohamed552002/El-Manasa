@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FutureEducationalPlatform.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240709195751_CreateComprehensiveExamTable")]
+    partial class CreateComprehensiveExamTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -341,37 +344,6 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.StudentQuestionAnswerEntites.StudentQuestionAnswer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWID()");
-
-                    b.Property<DateTime>("AnsweredAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("StudentAnswer")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentQuestionAnswers");
-                });
-
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Admin", b =>
                 {
                     b.Property<Guid>("Id")
@@ -623,13 +595,13 @@ namespace FutureEducationalPlatform.Persistence.Migrations
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.ExamEntities.ExamQuestion", b =>
                 {
                     b.HasOne("FutureEducationalPlatform.Domain.Entities.ExamEntities.Exam", "Exam")
-                        .WithMany("Questions")
+                        .WithMany()
                         .HasForeignKey("ExamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FutureEducationalPlatform.Domain.Entities.QuestionEntites.Question", "Question")
-                        .WithMany("Exams")
+                        .WithMany()
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -656,25 +628,6 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.Navigation("Homework");
 
                     b.Navigation("Question");
-                });
-
-            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.StudentQuestionAnswerEntites.StudentQuestionAnswer", b =>
-                {
-                    b.HasOne("FutureEducationalPlatform.Domain.Entities.QuestionEntites.Question", "Question")
-                        .WithMany("StudentsAnswers")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FutureEducationalPlatform.Domain.Entities.UserEntities.Student", "Student")
-                        .WithMany("QuestionsAnswers")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Admin", b =>
@@ -797,18 +750,6 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.Navigation("Sections");
                 });
 
-            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.ExamEntities.Exam", b =>
-                {
-                    b.Navigation("Questions");
-                });
-
-            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.QuestionEntites.Question", b =>
-                {
-                    b.Navigation("Exams");
-
-                    b.Navigation("StudentsAnswers");
-                });
-
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Parent", b =>
                 {
                     b.Navigation("Students");
@@ -817,11 +758,6 @@ namespace FutureEducationalPlatform.Persistence.Migrations
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Role", b =>
                 {
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Student", b =>
-                {
-                    b.Navigation("QuestionsAnswers");
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.User", b =>

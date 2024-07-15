@@ -1,6 +1,5 @@
 ﻿using FutureEducationalPlatform.Domain.Common;
 using FutureEducationalPlatform.Domain.Entities.CenterEntites;
-using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using FutureEducationalPlatform.Domain.Enums;
 
 namespace FutureEducationalPlatform.Domain.Entities.CourseEntites

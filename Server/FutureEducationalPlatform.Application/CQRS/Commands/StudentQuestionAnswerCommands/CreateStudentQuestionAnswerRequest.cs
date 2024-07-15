@@ -1,0 +1,3 @@
+﻿using FutureEducationalPlatform.Application.DTOS.StudentQuestionAnswerDtos;
+using MediatR;
+public record CreateStudentQuestionAnswerRequest(CreateStudentQuestionAnswerDto CreateStudentQuestionAnswerDto):IRequest<string>;

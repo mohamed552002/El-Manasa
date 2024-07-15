@@ -7,11 +7,10 @@ namespace FutureEducationalPlatform.Application.Common.Validators.CourseValidato
     {
         public BaseCourseValidator()
         {
-            RuleFor(r => r.Name).NotEmpty().NotNull().MaximumLength(64).WithMessage("لا يمكن ان يتجاوز الاسم 60 حرف");
-            RuleFor(r => r.Description).NotEmpty().NotNull().MaximumLength(512).WithMessage("لا يمكن ان يتجاوز الوصف 500 حرف");
-            RuleFor(r => r.StartDate).GreaterThan(DateTime.UtcNow).WithMessage("لا يمكن اضافة تاريخ ابتداء الدورة في الماضي");
-            RuleFor(r => r.EndDate).GreaterThan(r => r.StartDate).WithMessage("لا يمكن ان يكون تاريخ انتهاء الدورة قبل تاريخ بدايتها");
-            RuleFor(r => r.Level).IsInEnum().WithMessage("لا توجد سنة دراسية بهذه القيمة");
+            RuleFor(c => c.Name).NotEmpty().NotNull().MaximumLength(64).WithMessage("لا يمكن ان يتجاوز الاسم 60 حرف");
+            RuleFor(c => c.Description).NotEmpty().NotNull().MaximumLength(512).WithMessage("لا يمكن ان يتجاوز الوصف 500 حرف");
+            RuleFor(c => c.EndDate).GreaterThan(c => c.StartDate).WithMessage("لا يمكن ان يكون تاريخ انتهاء الدورة قبل تاريخ بدايتها");
+            RuleFor(c => c.Level).IsInEnum().WithMessage("لا توجد سنة دراسية بهذه القيمة");
         }
     }
 }
