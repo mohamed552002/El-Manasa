@@ -7,7 +7,7 @@ namespace FutureEducationalPlatform.Application.Common.Validators.AuthValidators
     {
         public LoginValidator():base(r=>r.LoginDto.Password)
         {
-            RuleFor(le => le.LoginDto.Email).EmailAddress().WithMessage("Please enter valid email").NotEmpty();
+            RuleFor(le => le.LoginDto.Email).EmailAddress().WithMessage("يرجي ادخال بريد الكتروني صحيح").NotEmpty();
         }
     }
 }

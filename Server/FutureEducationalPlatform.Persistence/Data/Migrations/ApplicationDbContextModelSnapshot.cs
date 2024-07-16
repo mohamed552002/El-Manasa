@@ -79,6 +79,49 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.ToTable("CentersCourseTime");
                 });
 
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.ComprehensiveExamEntities.ComprehensiveExam", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("time");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("ComprehensiveExams");
+                });
+
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CourseEntites.Course", b =>
                 {
                     b.Property<Guid>("Id")
@@ -520,6 +563,17 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Center");
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.ComprehensiveExamEntities.ComprehensiveExam", b =>
+                {
+                    b.HasOne("FutureEducationalPlatform.Domain.Entities.CourseEntites.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Course");
                 });

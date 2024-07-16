@@ -25,7 +25,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
             _otpServices.VerifyOTP(request.ResetPasswordDto.email,request.ResetPasswordDto.OTP);
             var user =await _userService.GetByEmailAsync(request.ResetPasswordDto.email);
             if (user == null)
-                throw new EntityNotFoundException("Wrong Email");
+                throw new EntityNotFoundException("خطأ في البريد الالكتروني");
             user.PasswordHash = _passwordService.HashPassword(request.ResetPasswordDto.newPassword);
             await _userService.Update(user);
             return "تم تغيير كلمة السر بنجاح";

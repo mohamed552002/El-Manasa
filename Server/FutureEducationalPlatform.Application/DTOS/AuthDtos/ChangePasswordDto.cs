@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace FutureEducationalPlatform.Application.DTOS.AuthDtos
 {
-    public class ChangePasswordDto
+    public record ChangePasswordDto
     {
         public string newPassword { get; set; }
         public string oldPassword { get; set; }

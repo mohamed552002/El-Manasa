@@ -1,11 +1,6 @@
-﻿using FutureEducationalPlatform.Application.DTOS.AuthDtos;
-using FutureEducationalPlatform.Application.DTOS.UserDtos;
+﻿using FutureEducationalPlatform.Application.DTOS.UserDtos;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace FutureEducationalPlatform.Application.CQRS.Commands.AuthCommands
 {

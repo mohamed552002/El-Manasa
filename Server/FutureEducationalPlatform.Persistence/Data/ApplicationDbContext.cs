@@ -1,10 +1,12 @@
 ﻿using FutureEducationalPlatform.Domain.Entities.CenterEntites;
+using FutureEducationalPlatform.Domain.Entities.ComprehensiveExamEntities;
 using FutureEducationalPlatform.Domain.Entities.CourseEntites;
 using FutureEducationalPlatform.Domain.Entities.ExamEntities;
 using FutureEducationalPlatform.Domain.Entities.HomeworkEntites;
 using FutureEducationalPlatform.Domain.Entities.QuestionEntites;
 using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using FutureEducationalPlatform.Persistence.EntityConfiguration.CenterEntitesConfiguration;
+using FutureEducationalPlatform.Persistence.EntityConfiguration.ComprehensiveExamEntities;
 using FutureEducationalPlatform.Persistence.EntityConfiguration.CourseEntitesConfiguration;
 using FutureEducationalPlatform.Persistence.EntityConfiguration.ExamEntitesConfiguration;
 using FutureEducationalPlatform.Persistence.EntityConfiguration.HomeworkEntitesConfiguration;
@@ -35,6 +37,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new ExamConfiguration());
         modelBuilder.ApplyConfiguration(new HomeworkQuestionConfiguration());
         modelBuilder.ApplyConfiguration(new ExamQuestionConfiguration());
+        modelBuilder.ApplyConfiguration(new ComprehensiveExamConfiguration());
 
     }
     public DbSet<User> Users { get; set; }
@@ -53,5 +56,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<Exam> Exams { get; set; }
     public DbSet<HomeworkQuestion> HomeworkQuestions { get; set; }
     public DbSet<ExamQuestion> ExamQuestions { get; set; }
+    public DbSet<ComprehensiveExam> ComprehensiveExams { get; set; }
 }
 

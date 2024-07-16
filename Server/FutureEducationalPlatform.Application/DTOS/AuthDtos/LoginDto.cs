@@ -7,9 +7,5 @@ using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.DTOS.AuthDtos
 {
-    public record LoginDto
-    (
-         string Email ,
-         string Password 
-    );
+    public record LoginDto (string Email , string Password );
 }

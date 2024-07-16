@@ -1,11 +1,5 @@
 ﻿using FutureEducationalPlatform.Application.Interfaces.IRepository;
 using FutureEducationalPlatform.Domain.Common;
-using FutureEducationalPlatform.Domain.Entities.UserEntities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Persistence.Repositories
 {
