@@ -1,5 +1,4 @@
 ﻿using FutureEducationalPlatform.Domain.Entities.CourseEntites;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FutureEducationalPlatform.Persistence.EntityConfiguration.CourseEntitesConfiguration

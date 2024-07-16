@@ -13,7 +13,7 @@ namespace FutureEducationalPlatform.Application.Common.Profiles
     {
         public CourseProfile()
         {
-            CreateMap<AddCourseDto, Course>();
+            CreateMap<CreateCourseDto, Course>();
             CreateMap<Course, GetCourseDto>();
             CreateMap<UpdateCourseDto,Course>();
         }
