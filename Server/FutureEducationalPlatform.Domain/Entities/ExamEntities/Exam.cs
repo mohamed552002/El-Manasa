@@ -7,5 +7,6 @@ namespace FutureEducationalPlatform.Domain.Entities.ExamEntities
         public string Name { get; set; }
         public bool IsActive { get; set; }
         public TimeSpan Duration { get; set; }
+        public virtual ICollection<ExamQuestion> Questions { get; set; }
     }
 }
