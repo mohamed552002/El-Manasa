@@ -1,12 +1,6 @@
 ﻿using FutureEducationalPlatform.Domain.Common;
 using FutureEducationalPlatform.Domain.Entities.AuthEntites;
 using FutureEducationalPlatform.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Domain.Entities.UserEntities
 {

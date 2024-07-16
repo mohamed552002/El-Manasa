@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FutureEducationalPlatform.Domain.Entities.UserEntities;
-using Microsoft.EntityFrameworkCore;
+﻿using FutureEducationalPlatform.Domain.Entities.UserEntities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntitiesConfiguration

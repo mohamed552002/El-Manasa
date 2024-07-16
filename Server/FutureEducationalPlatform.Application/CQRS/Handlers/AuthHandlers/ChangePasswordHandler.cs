@@ -21,7 +21,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
         {
             var user =  await _userService.GetUserByRefreshTokenAsync(request.ChangePasswordDto.refreshToken);
             if (user == null || request.ChangePasswordDto.refreshToken == "")
-                throw new EntityNotFoundException("User Not Found");
+                throw new EntityNotFoundException("المستخدم غير موجود");
             _passwordService.ChangePassword(user,request.ChangePasswordDto.oldPassword, request.ChangePasswordDto.newPassword);
             await _userService.Update(user);
             return request.ChangePasswordDto.newPassword;
