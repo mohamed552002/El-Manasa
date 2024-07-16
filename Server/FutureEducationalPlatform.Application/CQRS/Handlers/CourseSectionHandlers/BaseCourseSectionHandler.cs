@@ -1,11 +1,6 @@
 ﻿using FutureEducationalPlatform.Application.DTOS.CourseSectionDtos;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Entities.CourseEntites;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.CQRS.Handlers.CourseSectionHandlers
 {
