@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using FutureEducationalPlatform.Application.CQRS.Commands.QuestionCommands;
-using FutureEducationalPlatform.Application.DTOS.QuestionDtos;
 
 namespace FutureEducationalPlatform.Application.Common.Validators.QuestionValidators
 {
