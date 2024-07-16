@@ -1,14 +1,7 @@
 ﻿using FutureEducationalPlatform.Application.Common.Exceptions;
 using FutureEducationalPlatform.Application.Common.HelperMethods;
 using FutureEducationalPlatform.Application.Interfaces.IHelperServices;
-using FutureEducationalPlatform.Domain.Entities.UserEntities;
-using MediatR;
 using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Services.HelperServices
 {

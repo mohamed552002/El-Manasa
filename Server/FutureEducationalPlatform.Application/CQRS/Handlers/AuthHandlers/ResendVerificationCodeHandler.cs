@@ -25,9 +25,9 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
         public async Task<string> Handle(ResendVerificationCodeRequest request, CancellationToken cancellationToken)
         {
             var user=await _userService.GetByEmailAsync(request.UserEmailDto.Email);
-            if (user == null) throw new EntityNotFoundException("Wrong email");
+            if (user == null) throw new EntityNotFoundException("خطأ في البريد الالكتروني");
             _otpService.SendOTP(user.Email, user.Id.ToString());
-            return "Verification code has been sent again";
+            return "تمت اعادة ارسال رمز التحقق";
         }
     }
 }
