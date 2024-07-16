@@ -8,7 +8,7 @@ namespace FutureEducationalPlatform.Application.Common.Profiles
     {
         public ExamProfile()
         {
-            CreateMap<AddExamDto, Exam>();
+            CreateMap<CreateExamDto, Exam>();
             CreateMap<Exam, GetExamDto>();
             CreateMap<UpdateExamDto,Exam>();
         }

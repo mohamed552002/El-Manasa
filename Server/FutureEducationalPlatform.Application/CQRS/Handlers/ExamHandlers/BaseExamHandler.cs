@@ -6,8 +6,8 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.ExamHandlers
 {
     public class BaseExamHandler
     {
-        protected readonly IBaseService<Exam,GetExamDto,AddExamDto,UpdateExamDto> _baseService;
-        public BaseExamHandler(IBaseService<Exam, GetExamDto, AddExamDto, UpdateExamDto> baseService)
+        protected readonly IBaseService<Exam,GetExamDto,CreateExamDto,UpdateExamDto> _baseService;
+        public BaseExamHandler(IBaseService<Exam, GetExamDto, CreateExamDto, UpdateExamDto> baseService)
         {
             _baseService = baseService;
         }

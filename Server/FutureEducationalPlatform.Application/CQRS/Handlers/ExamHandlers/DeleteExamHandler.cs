@@ -7,7 +7,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.ExamHandlers
 {
     public class DeleteExamHandler : BaseExamHandler, IRequestHandler<DeleteExamRequest, string>
     {
-        public DeleteExamHandler(IBaseService<Exam, GetExamDto, AddExamDto, UpdateExamDto> baseService) : base(baseService) { }
+        public DeleteExamHandler(IBaseService<Exam, GetExamDto, CreateExamDto, UpdateExamDto> baseService) : base(baseService) { }
 
         public async Task<string> Handle(DeleteExamRequest request, CancellationToken cancellationToken)
         {

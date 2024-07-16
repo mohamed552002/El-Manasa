@@ -6,7 +6,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.ExamHandlers
 {
     public class UpdateExamHandler : BaseExamHandler, IRequestHandler<UpdateExamRequest, string>
     {
-        public UpdateExamHandler(Interfaces.IServices.IBaseService<Exam, GetExamDto, AddExamDto, UpdateExamDto> baseService) : base(baseService) { }
+        public UpdateExamHandler(Interfaces.IServices.IBaseService<Exam, GetExamDto, CreateExamDto, UpdateExamDto> baseService) : base(baseService) { }
 
         public async Task<string> Handle(UpdateExamRequest request, CancellationToken cancellationToken)
         {
