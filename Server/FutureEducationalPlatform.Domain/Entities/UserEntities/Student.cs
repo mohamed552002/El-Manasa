@@ -1,11 +1,5 @@
 ﻿using FutureEducationalPlatform.Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using FutureEducationalPlatform.Domain.Entities.StudentQuestionAnswerEntites;
 namespace FutureEducationalPlatform.Domain.Entities.UserEntities
 {
     public class Student : BaseModel
@@ -16,5 +10,6 @@ namespace FutureEducationalPlatform.Domain.Entities.UserEntities
         public Guid ParentId { get; set; }
         public virtual Parent Parent { get; set; }
         public User User { get; set; }
+        public virtual ICollection<StudentQuestionAnswer> QuestionsAnswers { get; set; }
     }
 }

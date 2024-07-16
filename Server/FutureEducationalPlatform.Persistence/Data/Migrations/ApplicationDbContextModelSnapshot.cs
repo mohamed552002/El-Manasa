@@ -79,6 +79,49 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.ToTable("CentersCourseTime");
                 });
 
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.ComprehensiveExamEntities.ComprehensiveExam", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("time");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("ComprehensiveExams");
+                });
+
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CourseEntites.Course", b =>
                 {
                     b.Property<Guid>("Id")
@@ -296,6 +339,37 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.StudentQuestionAnswerEntites.StudentQuestionAnswer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<DateTime>("AnsweredAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("StudentAnswer")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentQuestionAnswers");
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Admin", b =>
@@ -524,6 +598,17 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.Navigation("Course");
                 });
 
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.ComprehensiveExamEntities.ComprehensiveExam", b =>
+                {
+                    b.HasOne("FutureEducationalPlatform.Domain.Entities.CourseEntites.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.CourseEntites.CourseSection", b =>
                 {
                     b.HasOne("FutureEducationalPlatform.Domain.Entities.CourseEntites.Course", "Course")
@@ -538,13 +623,13 @@ namespace FutureEducationalPlatform.Persistence.Migrations
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.ExamEntities.ExamQuestion", b =>
                 {
                     b.HasOne("FutureEducationalPlatform.Domain.Entities.ExamEntities.Exam", "Exam")
-                        .WithMany()
+                        .WithMany("Questions")
                         .HasForeignKey("ExamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FutureEducationalPlatform.Domain.Entities.QuestionEntites.Question", "Question")
-                        .WithMany()
+                        .WithMany("Exams")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -571,6 +656,25 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.Navigation("Homework");
 
                     b.Navigation("Question");
+                });
+
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.StudentQuestionAnswerEntites.StudentQuestionAnswer", b =>
+                {
+                    b.HasOne("FutureEducationalPlatform.Domain.Entities.QuestionEntites.Question", "Question")
+                        .WithMany("StudentsAnswers")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FutureEducationalPlatform.Domain.Entities.UserEntities.Student", "Student")
+                        .WithMany("QuestionsAnswers")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Admin", b =>
@@ -693,6 +797,18 @@ namespace FutureEducationalPlatform.Persistence.Migrations
                     b.Navigation("Sections");
                 });
 
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.ExamEntities.Exam", b =>
+                {
+                    b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.QuestionEntites.Question", b =>
+                {
+                    b.Navigation("Exams");
+
+                    b.Navigation("StudentsAnswers");
+                });
+
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Parent", b =>
                 {
                     b.Navigation("Students");
@@ -701,6 +817,11 @@ namespace FutureEducationalPlatform.Persistence.Migrations
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Role", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.Student", b =>
+                {
+                    b.Navigation("QuestionsAnswers");
                 });
 
             modelBuilder.Entity("FutureEducationalPlatform.Domain.Entities.UserEntities.User", b =>

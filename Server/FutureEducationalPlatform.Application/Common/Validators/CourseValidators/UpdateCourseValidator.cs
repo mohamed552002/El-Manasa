@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using FutureEducationalPlatform.Application.CQRS.Commands.CourseCommands;
 
 namespace FutureEducationalPlatform.Application.Common.Validators.CourseValidators
 {
@@ -7,7 +6,7 @@ namespace FutureEducationalPlatform.Application.Common.Validators.CourseValidato
     {
         public UpdateCourseValidator()
         {
-            RuleFor(x => x.UpdateCourseDto).SetValidator(new BaseCourseValidator());
+            RuleFor(ur => ur.UpdateCourseDto).SetValidator(new BaseCourseValidator());
         }
     }
 }

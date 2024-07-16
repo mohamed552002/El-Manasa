@@ -25,7 +25,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.AuthHandlers
         {
             var user = await _userService.GetByEmailAsync(request.LoginDto.Email);
             if (user == null || !_passwordService.VerifyPassword(request.LoginDto.Password, user.PasswordHash) || !user.EmailConfirmed)
-                throw new BadRequestException("Wrong email or password");
+                throw new BadRequestException("خطأ في البريد الالكتروني او كلمة المرور");
             return await _jwtService.GetAuthModel(user);
         }
     }

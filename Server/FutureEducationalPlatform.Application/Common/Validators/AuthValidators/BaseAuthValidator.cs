@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Common.Validators.AuthValidators
 {
@@ -13,12 +8,12 @@ namespace FutureEducationalPlatform.Application.Common.Validators.AuthValidators
         public BaseAuthValidator(Expression<Func<T,string>> passwordExpression)
         {
             RuleFor(passwordExpression)
-                .NotEmpty().NotNull().WithMessage("Password must not be empty")
-                .MinimumLength(8).WithMessage("Password must be at least 8 characters long")
-                .Matches(@"[A-Z]").WithMessage("Password must contain at least one uppercase letter")
-                .Matches(@"[a-z]").WithMessage("Password must contain at least one lowercase letter")
-                .Matches(@"[0-9]").WithMessage("Password must contain at least one number")
-                .Matches(@"[\W_]").WithMessage("Password must contain at least one special character");
+                .NotEmpty().NotNull().WithMessage("كلمة المرور لا يمكن ان تكون فارغة")
+                .MinimumLength(8).WithMessage("يجب ان تحتوي كلمة المرور علي 8 حروف علي الاقل")
+                .Matches(@"[A-Z]").WithMessage("يجب ان تحتوي كلمة المرور علي حرف كبير علي الاقل")
+                .Matches(@"[a-z]").WithMessage("يجب ان تحتوي كلمة المرور علي حرف صغير علي الاقل")
+                .Matches(@"[0-9]").WithMessage("يجب ان تحتوي كلمة المرور علي رقم واحد علي الافل")
+                .Matches(@"[\W_]").WithMessage("يجب ان تحتوي كلمة المرور علي حرف مميز علي الاقل");
         }
     }
 }

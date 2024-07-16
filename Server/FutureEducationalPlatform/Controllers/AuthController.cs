@@ -29,35 +29,32 @@ namespace FutureEducationalPlatform.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterAsync(CreateUserDto userDto)
         {
-            var command= new RegisterRequest(userDto);
-            var result = await _mediator.Send(command);
+            var result = await _mediator.Send(new RegisterRequest(userDto));
             return Ok(result);
         }
         [HttpPost("ForgetPassword")]
         public async Task<IActionResult> ForgetPassword(string email)
         {
-            await _mediator.Send(new ForgetPasswordRequest(email));
-            return Ok("Forget password OTP has been sent To your email ");
+            var result = await _mediator.Send(new ForgetPasswordRequest(email));
+            return Ok(result);
         }
         [HttpPost("VerifyAccount")]
         public async Task<IActionResult> VerifyAccountAsync(VerifyAccountDto verifyAccountDto)
         {
-            var command=new VerifyAccountRequest(verifyAccountDto);
-            var result=await _mediator.Send(command);
+            var result=await _mediator.Send(new VerifyAccountRequest(verifyAccountDto));
             return Ok(result);
         }
 
         [HttpPost("ResendVerificationCode")]
         public async Task<IActionResult> ResendVerificationCodeAsync(UserEmailDto userEmailDto)
         {
-            var command=new ResendVerificationCodeRequest(userEmailDto);
-            var result=await _mediator.Send(command);
+            var result=await _mediator.Send(new ResendVerificationCodeRequest(userEmailDto));
             return Ok(result);
         }
         [HttpPut("ResetPassword")]
         public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
         {
-            var result =await _mediator.Send(new ResetPasswordRequest(resetPasswordDto));
+            var result = await _mediator.Send(new ResetPasswordRequest(resetPasswordDto));
             return Ok(result);
         }
         private void SetRefreshTokenInCookie(string refreshToken,DateTime expires)

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FutureEducationalPlatform.Application.Common.HelperMethods
+﻿namespace FutureEducationalPlatform.Application.Common.HelperMethods
 {
     public static class RandomCodeGenerator
     {
