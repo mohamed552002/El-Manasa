@@ -2,7 +2,6 @@
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Entities.CenterEntites;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace FutureEducationalPlatform.Application.CQRS.Handlers.CenterHandlers
 {
