@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using FutureEducationalPlatform.Application.DTOS.HomeworkDtos;
 using FutureEducationalPlatform.Domain.Entities.HomeworkEntites;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Common.Profiles
 {
