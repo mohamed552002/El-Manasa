@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FutureEducationalPlatform.Application.DTOS.CenterCourseTimeDtos
+﻿namespace FutureEducationalPlatform.Application.DTOS.CenterCourseTimeDtos
 {
     public record BaseCenterCourseTimeDto
-    (
-        Guid CenterId,
-        Guid CourseId,
-        DayOfWeek LectureDay,
-        TimeOnly LectureTime
-    );
+    {
+        public Guid CenterId { get; set;}
+        public Guid CourseId { get; set;}
+        public DayOfWeek LectureDay { get; set;}
+        public TimeOnly LectureTime { get; set;}
+    }
 }

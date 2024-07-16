@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FutureEducationalPlatform.Application.DTOS.CourseSectionDtos
+﻿namespace FutureEducationalPlatform.Application.DTOS.CourseSectionDtos
 {
-    public record GetCourseSectionDto : BaseCourseSectionDto
-    {
-        public Guid Id { get; set; }
-        public GetCourseSectionDto(string Name, string Description, DateTime StartDate, DateTime EndDate, Guid CourseId, bool IsActive) : base(Name, Description, StartDate, EndDate,CourseId, IsActive)
-        {
-        }
-    }
+    public record GetCourseSectionDto(Guid Id) : BaseCourseSectionDto;
 }

@@ -6,8 +6,8 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.CenterCourseTimeHa
 {
     public class BaseCenterCourseTimeHandler
     {
-        protected readonly IBaseService<CenterCourseTime,GetCenterCourseTimeDto,AddCenterCourseTimeDto,UpdateCenterCourseTimeDto> _baseService;
-        public BaseCenterCourseTimeHandler(IBaseService<CenterCourseTime, GetCenterCourseTimeDto, AddCenterCourseTimeDto, UpdateCenterCourseTimeDto> baseService)
+        protected readonly IBaseService<CenterCourseTime,GetCenterCourseTimeDto,CreateCenterCourseTimeDto,UpdateCenterCourseTimeDto> _baseService;
+        public BaseCenterCourseTimeHandler(IBaseService<CenterCourseTime, GetCenterCourseTimeDto, CreateCenterCourseTimeDto, UpdateCenterCourseTimeDto> baseService)
         {
             _baseService = baseService;
         }
