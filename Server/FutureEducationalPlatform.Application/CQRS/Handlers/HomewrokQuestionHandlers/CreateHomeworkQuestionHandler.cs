@@ -6,11 +6,6 @@ using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Entities.HomeworkEntites;
 using FutureEducationalPlatform.Domain.Entities.QuestionEntites;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.CQRS.Handlers.HomewrokQuestionHandlers
 {
