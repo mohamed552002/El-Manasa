@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FutureEducationalPlatform.Application.DTOS.CenterDtos
+﻿namespace FutureEducationalPlatform.Application.DTOS.CenterDtos
 {
-    public record BaseCenterDto(
-        string Name,
-        string Address
-    );
+    public record BaseCenterDto {
+        public string Name { get; set; }
+        public string Address { get; set; }
+    };
 }

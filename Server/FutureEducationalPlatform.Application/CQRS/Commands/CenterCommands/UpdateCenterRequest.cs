@@ -1,5 +1,4 @@
-﻿
-using FutureEducationalPlatform.Application.DTOS.CenterDtos;
+﻿using FutureEducationalPlatform.Application.DTOS.CenterDtos;
 using MediatR;
 
 namespace FutureEducationalPlatform.Application.CQRS.Commands.CenterCommands
