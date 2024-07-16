@@ -1,10 +1,4 @@
 ﻿using FluentValidation;
-using FutureEducationalPlatform.Application.CQRS.Commands.CenterCourseTimeCommands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Common.Validators.CenterCourseTimeValidators
 {
@@ -12,7 +6,7 @@ namespace FutureEducationalPlatform.Application.Common.Validators.CenterCourseTi
     {
         public CreateCenterCourseTimeValidators()
         {
-            RuleFor(c => c.AddCenterCourseTimeDto).SetValidator(new BaseCenterCourseTimeValidator());
+            RuleFor(r => r.CreateCenterCourseTimeDto).SetValidator(new BaseCenterCourseTimeValidator());
         }
     }
 }

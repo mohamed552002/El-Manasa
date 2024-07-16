@@ -14,7 +14,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.CenterCourseTimeHa
         private readonly IBaseRepository<Center> _centerRepository;
         private readonly IBaseRepository<Course> _courseRepository;
         private readonly IBaseRepository<CenterCourseTime> _centerCourseTimeRepository;
-        public UpdateCenterCourseTimeHandler(IBaseService<CenterCourseTime, GetCenterCourseTimeDto, AddCenterCourseTimeDto, UpdateCenterCourseTimeDto> baseService,IUnitOfWork unitOfWork) : base(baseService)
+        public UpdateCenterCourseTimeHandler(IBaseService<CenterCourseTime, GetCenterCourseTimeDto, CreateCenterCourseTimeDto, UpdateCenterCourseTimeDto> baseService,IUnitOfWork unitOfWork) : base(baseService)
         {
             _unitOfWork = unitOfWork;
             _centerRepository= _unitOfWork.GetRepository<Center>();

@@ -12,7 +12,6 @@ using FutureEducationalPlatform.Persistence.EntityConfiguration.QuestionEntitesC
 using FutureEducationalPlatform.Persistence.EntityConfiguration.UserEntitiesConfiguration;
 using Microsoft.EntityFrameworkCore;
 
-
 public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options) {}

@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
 using FutureEducationalPlatform.Application.DTOS.CenterCourseTimeDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Common.Validators.CenterCourseTimeValidators
 {
@@ -12,10 +7,10 @@ namespace FutureEducationalPlatform.Application.Common.Validators.CenterCourseTi
     {
         public BaseCenterCourseTimeValidator()
         {
-            RuleFor(r => r.CenterId).NotEmpty().NotNull().WithMessage("يرجي ادخال رقم السنتر");
-            RuleFor(r => r.CourseId).NotEmpty().NotNull().WithMessage("يرجي ادخال رقم الكورس");
-            RuleFor(r => r.LectureDay).NotEmpty().NotNull().IsInEnum().WithMessage("لا يوجد يوم بهذه القيمه");
-            RuleFor(r => r.LectureTime).NotEmpty().NotNull().WithMessage("يرجي ادخال ميعاد المحاضره");
+            RuleFor(cct => cct.CenterId).NotEmpty().NotNull().WithMessage("يرجي ادخال رقم السنتر");
+            RuleFor(cct => cct.CourseId).NotEmpty().NotNull().WithMessage("يرجي ادخال رقم الكورس");
+            RuleFor(cct => cct.LectureDay).NotEmpty().NotNull().IsInEnum().WithMessage("لا يوجد يوم بهذه القيمه");
+            RuleFor(cct => cct.LectureTime).NotEmpty().NotNull().WithMessage("يرجي ادخال ميعاد المحاضره");
         }
     }
 }

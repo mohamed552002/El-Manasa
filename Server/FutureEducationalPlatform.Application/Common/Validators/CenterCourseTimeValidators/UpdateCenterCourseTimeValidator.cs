@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FutureEducationalPlatform.Application.Common.Validators.CenterCourseTimeValidators
 {
@@ -11,7 +6,7 @@ namespace FutureEducationalPlatform.Application.Common.Validators.CenterCourseTi
     {
         public UpdateCenterCourseTimeValidator()
         {
-            RuleFor(c => c.UpdateCenterCourseTimeDto).SetValidator(new BaseCenterCourseTimeValidator());
+            RuleFor(r => r.UpdateCenterCourseTimeDto).SetValidator(new BaseCenterCourseTimeValidator());
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using FutureEducationalPlatform.Application.CQRS.Commands.CenterCourseTimeCommands;
-using FutureEducationalPlatform.Application.DTOS.CenterCourseTimeDtos;
+﻿using FutureEducationalPlatform.Application.DTOS.CenterCourseTimeDtos;
 using FutureEducationalPlatform.Application.Interfaces.IServices;
 using FutureEducationalPlatform.Domain.Entities.CenterEntites;
 using MediatR;
@@ -8,7 +7,7 @@ namespace FutureEducationalPlatform.Application.CQRS.Handlers.CenterCourseTimeHa
 {
     public class DeleteCenterCourseTimeHandler :BaseCenterCourseTimeHandler , IRequestHandler<DeleteCenterCourseTimeRequest, string>
     {
-        public DeleteCenterCourseTimeHandler(IBaseService<CenterCourseTime, GetCenterCourseTimeDto, AddCenterCourseTimeDto, UpdateCenterCourseTimeDto> baseService) : base(baseService) { }
+        public DeleteCenterCourseTimeHandler(IBaseService<CenterCourseTime, GetCenterCourseTimeDto, CreateCenterCourseTimeDto, UpdateCenterCourseTimeDto> baseService) : base(baseService) { }
         public async Task<string> Handle(DeleteCenterCourseTimeRequest request, CancellationToken cancellationToken)
         {
             await _baseService.Delete(request.Id);
